@@ -159,6 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.TowerDefenceLab
+    Standalone: com.DefaultCompany.TowerDefenceLab
   buildNumber:
     Standalone: 0
     VisionOS: 0
