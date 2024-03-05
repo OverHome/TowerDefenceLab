@@ -11,6 +11,7 @@ public class SpawnObject : MonoBehaviour
 
     private ARRaycastManager _raycastManager;
     private ARPlaneManager _planeManager;
+    private bool _isSpawned;
 
     private void Start()
     {
@@ -27,9 +28,14 @@ public class SpawnObject : MonoBehaviour
 
     private void Spawn(Vector2 pos)
     {
-        List<ARRaycastHit> hits = new List<ARRaycastHit>();
-        _raycastManager.Raycast(pos, hits, TrackableType.Planes);
-        Instantiate(spawnObject, hits[0].pose.position, new Quaternion());
+        if (!_isSpawned)
+        {
+            _isSpawned = true;
+            List<ARRaycastHit> hits = new List<ARRaycastHit>();
+            _raycastManager.Raycast(pos, hits, TrackableType.Planes);
+            Instantiate(spawnObject, hits[0].pose.position, new Quaternion());
+        }
+       
     }
 
     private void Update()
