@@ -9,6 +9,11 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         EnemyScript.TowerPos = towerPos;
-        var enemy = Instantiate(enemyScript.gameObject, transform.position, transform.rotation, transform.parent);
+        InvokeRepeating("SpawnEnemy", 0.0f, 0.5f);
+    }
+
+    private void SpawnEnemy()
+    {
+        Instantiate(enemyScript.gameObject, transform.position, transform.rotation, transform.parent);
     }
 }
