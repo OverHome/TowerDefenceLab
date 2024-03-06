@@ -634,7 +634,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.439, z: 1.411}
-  m_LocalScale: {x: 0.49619, y: 0.49619, z: 0.49619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 280138992091671207}
@@ -744,9 +744,9 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.05
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 203445cfa7ffd29d687ebbcb95ca20e4, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 008d99ae4ef139c8e9cc30a8d5767e98, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &4155451671540299670
 GameObject:
@@ -776,8 +776,8 @@ Transform:
   m_GameObject: {fileID: 4155451671540299670}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 2.11, y: 0.45, z: -2.114}
-  m_LocalScale: {x: 3.8567998, y: 0.84664017, z: 0.08058795}
+  m_LocalPosition: {x: 2.11, y: 0.45, z: -2.49}
+  m_LocalScale: {x: 4.86, y: 0.84664017, z: 0.08058795}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 280138992091671207}
@@ -986,8 +986,8 @@ Transform:
   m_GameObject: {fileID: 4732302403754269762}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.49, y: 0.45, z: -1.38}
-  m_LocalScale: {x: 4.860394, y: 0.84664017, z: 0.08058795}
+  m_LocalPosition: {x: 3.49, y: 0.45, z: -1.876}
+  m_LocalScale: {x: 6.05, y: 0.84664017, z: 0.08058795}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 280138992091671207}
@@ -1305,6 +1305,10 @@ PrefabInstance:
       propertyPath: towerPos
       value: 
       objectReference: {fileID: 52858072338432771}
+    - target: {fileID: 7857273565567131888, guid: 0d7b9b8b1caf880eb8384bd40a5ff3cc, type: 3}
+      propertyPath: spawnTimer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

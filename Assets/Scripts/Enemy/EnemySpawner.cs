@@ -6,10 +6,11 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform towerPos;
     [SerializeField] private EnemyScript enemyScript;
+    [SerializeField] private float spawnTimer;
     private void Start()
     {
         EnemyScript.TowerPos = towerPos;
-        InvokeRepeating("SpawnEnemy", 0.0f, 0.5f);
+        InvokeRepeating("SpawnEnemy", 0.0f, spawnTimer);
     }
 
     private void SpawnEnemy()

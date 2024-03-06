@@ -53,7 +53,7 @@ public class TurretScript : MonoBehaviour
             GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
             projectileInstance.transform.LookAt(target);;
             // Направление снаряда к цели
-            projectileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * 5.0f, ForceMode.Impulse);
+            projectileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * 20.0f, ForceMode.Impulse);
         }
     }
 }

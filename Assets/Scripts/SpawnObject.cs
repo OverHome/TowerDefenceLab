@@ -8,6 +8,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 public class SpawnObject : MonoBehaviour
 {
     [SerializeField] private GameObject spawnObject;
+    
 
     private ARRaycastManager _raycastManager;
     private ARPlaneManager _planeManager;
@@ -18,22 +19,28 @@ public class SpawnObject : MonoBehaviour
         _raycastManager = GetComponent<ARRaycastManager>();
         _planeManager = GetComponent<ARPlaneManager>();
     }
-
+    
     private void OnEnable()
     {
         EnhancedTouch.Touch.onFingerDown += finger => {Spawn(finger.currentTouch.screenPosition);};
         TouchSimulation.Enable(); 
         EnhancedTouchSupport.Enable();
+
     }
 
     private void Spawn(Vector2 pos)
     {
         if (!_isSpawned)
         {
-            _isSpawned = true;
+            
             List<ARRaycastHit> hits = new List<ARRaycastHit>();
-            _raycastManager.Raycast(pos, hits, TrackableType.Planes);
+            _raycastManager.Raycast(pos, hits, TrackableType.AllTypes);
             Instantiate(spawnObject, hits[0].pose.position, new Quaternion());
+            _isSpawned = true;
+            foreach (var plane in _planeManager.trackables)
+            {
+                plane.gameObject.SetActive(false);
+            }
         }
        
     }

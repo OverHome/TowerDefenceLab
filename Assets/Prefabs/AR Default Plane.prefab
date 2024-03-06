@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DestroyOnRemoval: 1
-  m_VertexChangedThreshold: 0.01
+  m_VertexChangedThreshold: 0.1
 --- !u!114 &6195634933385067828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
