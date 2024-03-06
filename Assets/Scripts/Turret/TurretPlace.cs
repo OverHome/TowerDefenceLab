@@ -10,8 +10,6 @@ public class TurretPlace : MonoBehaviour
     private void OnEnable()
     {
         EnhancedTouch.Touch.onFingerDown += finger => {EnableTurret(Camera.main.ScreenPointToRay(finger.currentTouch.screenPosition)); };
-        EnhancedTouch.TouchSimulation.Enable(); 
-        EnhancedTouch.EnhancedTouchSupport.Enable();
     }
     
     void Update()
