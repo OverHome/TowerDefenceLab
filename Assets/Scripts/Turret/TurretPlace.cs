@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretPlace : MonoBehaviour
 {
     [SerializeField] private GameObject turret;
+    [SerializeField] private int price;
     
     private bool _isActiveTurret;
     private InteractiveObject _interactiveObject;
@@ -22,11 +23,11 @@ public class TurretPlace : MonoBehaviour
 
     private void EnableTurret()
     {
-        if (!_isActiveTurret)
-        {
-            _isActiveTurret = true;
-            turret.SetActive(_isActiveTurret);
-        }
-       
+        if (_isActiveTurret) return;
+        if (PlayerManager.Instance.TotalCoins < price) return;
+        PlayerManager.Instance.AddCoins(-price);
+        _isActiveTurret = true;
+        turret.SetActive(_isActiveTurret);
+
     }
 }

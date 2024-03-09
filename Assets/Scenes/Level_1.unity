@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 202368565}
   - component: {fileID: 202368570}
   - component: {fileID: 202368571}
+  - component: {fileID: 202368572}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -382,6 +383,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eccaf680ea2b50ba9c17861aa15a995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnScreenTap:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &202368572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202368563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b39300f4444c86852845f374bef9bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _totalCoinsText: {fileID: 602148705}
+  TotalCoins: 50
 --- !u!1 &285114209
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1790367388
 MonoBehaviour:
   m_ObjectHideFlags: 0

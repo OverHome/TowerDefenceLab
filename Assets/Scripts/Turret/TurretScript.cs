@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurretScript : MonoBehaviour
 {
     [SerializeField] private Canvas turretUI;
+    [SerializeField] private int upgradePrice;
 
     public float fireRate = 1.0f;
     public float range = 10.0f;
@@ -101,6 +102,8 @@ public class TurretScript : MonoBehaviour
     
     public void UpgradeTurret()
     {
+        if (PlayerManager.Instance.TotalCoins < upgradePrice) return;
+        PlayerManager.Instance.AddCoins(-upgradePrice);
         _turretLevel++;
         _nextFireTime = Time.time;
         Debug.Log("Turret upgraded to level " + _turretLevel);
