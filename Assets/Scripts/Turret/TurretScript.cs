@@ -1,28 +1,54 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(InteractiveObject))]
 public class TurretScript : MonoBehaviour
 {
-    public Transform target;
+    [SerializeField] private Canvas turretUI;
+
     public float fireRate = 1.0f;
     public float range = 10.0f;
     public GameObject projectile;
 
-    private float nextFireTime = 0.0f;
+    private float _nextFireTime = 0.0f;
+    private float _targetUpdateInterval = 0.1f;
+    private Transform _target;
+    private InteractiveObject _interactiveObject;
+    private int _turretLevel = 1; // Уровень турели
 
-    void Start()
+    private void OnEnable()
     {
-        InvokeRepeating("UpdateTarget", 0.0f, 0.5f);
+        _interactiveObject = GetComponent<InteractiveObject>();
+        _interactiveObject.OnObjectPressed.AddListener(ShowUI);
+        InputManager.Instance.OnScreenTap.AddListener(HideUI);
     }
 
-    void UpdateTarget()
+    private void OnDisable()
+    {
+        _interactiveObject.OnObjectPressed.RemoveListener(ShowUI);
+        InputManager.Instance.OnScreenTap.RemoveListener(HideUI);
+    }
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(UpdateTarget), 0.0f, _targetUpdateInterval);
+    }
+
+    private void UpdateTarget()
+    {
+        GameObject nearestEnemy = FindNearestEnemy();
+        _target = nearestEnemy?.transform;
+    }
+
+    private GameObject FindNearestEnemy()
     {
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
+
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
             if (distance < shortestDistance)
             {
                 shortestDistance = distance;
@@ -30,30 +56,53 @@ public class TurretScript : MonoBehaviour
             }
         }
 
-        if (nearestEnemy != null)
+        return nearestEnemy;
+    }
+
+    private void Update()
+    {
+        LookAtTarget();
+
+        if (Time.time >= _nextFireTime && _target != null)
         {
-            target = nearestEnemy.transform;
+            FireProjectile();
         }
     }
 
-    void Update()
+    private void LookAtTarget()
     {
-        // Поворот турели к цели
-        if (target != null)
+        if (_target != null)
         {
-            transform.LookAt(target);
+            transform.LookAt(_target);
         }
+    }
 
-        // Стрельба по цели
-        if (Time.time >= nextFireTime && target != null)
+    private void FireProjectile()
+    {
+        _nextFireTime = Time.time + 1.0f / (fireRate*_turretLevel);
+
+        GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
+        projectileInstance.transform.LookAt(_target);
+        projectileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * 20.0f, ForceMode.Impulse);
+    }
+
+    private void ShowUI()
+    {
+        turretUI.gameObject.SetActive(true);
+    }
+
+    private void HideUI(Vector2 screenPosition)
+    {
+        if (!RectTransformUtility.RectangleContainsScreenPoint(turretUI.GetComponent<RectTransform>(), screenPosition))
         {
-            nextFireTime = Time.time + 1.0f / fireRate;
-            
-            // Создание снаряда
-            GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
-            projectileInstance.transform.LookAt(target);;
-            // Направление снаряда к цели
-            projectileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * 20.0f, ForceMode.Impulse);
+            turretUI.gameObject.SetActive(false);
         }
+    }
+    
+    public void UpgradeTurret()
+    {
+        _turretLevel++;
+        _nextFireTime = Time.time;
+        Debug.Log("Turret upgraded to level " + _turretLevel);
     }
 }

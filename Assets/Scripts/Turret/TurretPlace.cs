@@ -1,37 +1,32 @@
+using System;
 using UnityEngine;
-using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
-
+[RequireComponent(typeof(InteractiveObject))]
 public class TurretPlace : MonoBehaviour
 {
     [SerializeField] private GameObject turret;
-    private bool _isActiveTurret;
     
+    private bool _isActiveTurret;
+    private InteractiveObject _interactiveObject;
+
     private void OnEnable()
     {
-        EnhancedTouch.Touch.onFingerDown += finger => {EnableTurret(Camera.main.ScreenPointToRay(finger.currentTouch.screenPosition)); };
-    }
-    
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            EnableTurret(Camera.main.ScreenPointToRay(Input.mousePosition));
-           
-        }
+        _interactiveObject = GetComponent<InteractiveObject>();
+        _interactiveObject.OnObjectPressed.AddListener(EnableTurret);
     }
 
-    private void EnableTurret(Ray ray)
+    private void OnDisable()
     {
-        RaycastHit hit;
+        _interactiveObject.OnObjectPressed.RemoveListener(EnableTurret);
+    }
 
-        if (Physics.Raycast(ray, out hit))
+    private void EnableTurret()
+    {
+        if (!_isActiveTurret)
         {
-            if (hit.transform.gameObject == gameObject)
-            {
-                _isActiveTurret = true;
-                turret.SetActive(_isActiveTurret);
-            }
+            _isActiveTurret = true;
+            turret.SetActive(_isActiveTurret);
         }
+       
     }
 }

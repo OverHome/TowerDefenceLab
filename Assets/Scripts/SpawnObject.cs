@@ -59,7 +59,6 @@ public class SpawnObject : MonoBehaviour
     }
     private void Update()
     {
-        print( Camera.main.transform.position);
         if (Input.GetButtonDown("Fire1"))
         {
             Spawn(Input.mousePosition);
