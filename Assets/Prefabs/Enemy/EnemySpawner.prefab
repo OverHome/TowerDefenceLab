@@ -120,3 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPos: {fileID: 0}
   enemyScript: {fileID: 3507052489848826853, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
+  initialSpawnTimer: 5
+  minSpawnTimer: 0.5
+  spawnTimerDecreaseRate: 0.2

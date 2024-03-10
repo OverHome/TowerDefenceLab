@@ -6,28 +6,29 @@ public class TurretScript : MonoBehaviour
 {
     [SerializeField] private Canvas turretUI;
     [SerializeField] private int upgradePrice;
+    [SerializeField] private int sellPrice;
 
-    public float fireRate = 1.0f;
-    public float range = 10.0f;
-    public GameObject projectile;
+    [SerializeField] private float fireRate = 1.0f;
+    [SerializeField] private float range = 10.0f;
+    [SerializeField] private GameObject projectile;
 
-    private float _nextFireTime = 0.0f;
+    private float _nextFireTime;
     private float _targetUpdateInterval = 0.1f;
     private Transform _target;
     private InteractiveObject _interactiveObject;
-    private int _turretLevel = 1; // Уровень турели
+    private TurretPlace _turretPlace;
+    private int _turretLevel = 1;
 
     private void OnEnable()
     {
         _interactiveObject = GetComponent<InteractiveObject>();
+        _turretPlace = transform.parent.GetComponent<TurretPlace>();
         _interactiveObject.OnObjectPressed.AddListener(ShowUI);
-        InputManager.Instance.OnScreenTap.AddListener(HideUI);
     }
 
     private void OnDisable()
     {
         _interactiveObject.OnObjectPressed.RemoveListener(ShowUI);
-        InputManager.Instance.OnScreenTap.RemoveListener(HideUI);
     }
 
     private void Start()
@@ -91,14 +92,6 @@ public class TurretScript : MonoBehaviour
     {
         turretUI.gameObject.SetActive(true);
     }
-
-    private void HideUI(Vector2 screenPosition)
-    {
-        if (!RectTransformUtility.RectangleContainsScreenPoint(turretUI.GetComponent<RectTransform>(), screenPosition))
-        {
-            turretUI.gameObject.SetActive(false);
-        }
-    }
     
     public void UpgradeTurret()
     {
@@ -107,5 +100,11 @@ public class TurretScript : MonoBehaviour
         _turretLevel++;
         _nextFireTime = Time.time;
         Debug.Log("Turret upgraded to level " + _turretLevel);
+    }
+    
+    public void SellTurret()
+    {
+        _turretPlace.SellTurret();
+        _turretLevel = 1;
     }
 }

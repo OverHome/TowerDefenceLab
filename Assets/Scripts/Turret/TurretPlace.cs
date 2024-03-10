@@ -28,6 +28,10 @@ public class TurretPlace : MonoBehaviour
         PlayerManager.Instance.AddCoins(-price);
         _isActiveTurret = true;
         turret.SetActive(_isActiveTurret);
+    }
 
+    public void SellTurret()
+    {
+        _isActiveTurret = false;
     }
 }
