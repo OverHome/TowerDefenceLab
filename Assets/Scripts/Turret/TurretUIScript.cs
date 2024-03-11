@@ -2,9 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-// using Input = UnityEngine.Windows.Input;
-
-
 public class TurretUIScript : MonoBehaviour
 {
     private Camera _mainCamera;

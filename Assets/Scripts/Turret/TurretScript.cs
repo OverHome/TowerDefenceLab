@@ -12,17 +12,21 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private float range = 10.0f;
     [SerializeField] private GameObject projectile;
 
+    private BulletScript _projectileScript;
     private float _nextFireTime;
     private float _targetUpdateInterval = 0.1f;
     private Transform _target;
     private InteractiveObject _interactiveObject;
     private TurretPlace _turretPlace;
     private int _turretLevel = 1;
+    private float _damage;
 
     private void OnEnable()
     {
         _interactiveObject = GetComponent<InteractiveObject>();
         _turretPlace = transform.parent.GetComponent<TurretPlace>();
+        _projectileScript = projectile.GetComponent<BulletScript>();
+        _damage = _projectileScript.Damage;
         _interactiveObject.OnObjectPressed.AddListener(ShowUI);
     }
 
@@ -84,7 +88,7 @@ public class TurretScript : MonoBehaviour
         _nextFireTime = Time.time + 1.0f / (fireRate*_turretLevel);
 
         GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
-        projectileInstance.transform.LookAt(_target);
+        projectileInstance.GetComponent<BulletScript>().Damage = _damage;
         projectileInstance.GetComponent<Rigidbody>().AddForce(transform.forward * 20.0f, ForceMode.Impulse);
     }
 
@@ -99,12 +103,15 @@ public class TurretScript : MonoBehaviour
         PlayerManager.Instance.AddCoins(-upgradePrice);
         _turretLevel++;
         _nextFireTime = Time.time;
-        Debug.Log("Turret upgraded to level " + _turretLevel);
+        _damage += _turretLevel*10;
+       print("Турель уровня: " + _turretLevel);
     }
     
     public void SellTurret()
     {
+        turretUI.gameObject.SetActive(false);
         _turretPlace.SellTurret();
+        PlayerManager.Instance.AddCoins(sellPrice);
         _turretLevel = 1;
     }
 }

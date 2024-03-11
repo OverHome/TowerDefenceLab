@@ -5,31 +5,22 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField] public float Damage;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Turret"))
+        if (other.CompareTag("Turret"))
         {
             return;
         }
-        else if (other.gameObject.CompareTag("Enemy"))
+        else if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject);
+            EnemyScript enemyScript = other.GetComponent<EnemyScript>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(Damage);
+            }
         }
-        
-        Destroy(gameObject);
-    }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Turret"))
-        {
-           return;
-        }
-        else if (other.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(other.gameObject);
-        }
-        
         Destroy(gameObject);
     }
 }

@@ -520,8 +520,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretUI: {fileID: 1261382781996454633}
   upgradePrice: 20
-  sellPrice: 0
-  fireRate: 0.2
+  sellPrice: 25
+  fireRate: 0.4
   range: 10
   projectile: {fileID: 1393406441597871861, guid: 6c49636b782630f8085ab7d2310cead6, type: 3}
 --- !u!114 &8498255537477609089

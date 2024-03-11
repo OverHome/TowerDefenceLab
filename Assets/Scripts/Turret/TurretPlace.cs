@@ -33,5 +33,6 @@ public class TurretPlace : MonoBehaviour
     public void SellTurret()
     {
         _isActiveTurret = false;
+        turret.SetActive(_isActiveTurret);
     }
 }
