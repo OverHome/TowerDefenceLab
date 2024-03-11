@@ -1579,8 +1579,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7857273565567131888, guid: 0d7b9b8b1caf880eb8384bd40a5ff3cc, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1632272389436531030}
+    - target: {fileID: 7857273565567131888, guid: 0d7b9b8b1caf880eb8384bd40a5ff3cc, type: 3}
       propertyPath: spawnTimer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7857273565567131888, guid: 0d7b9b8b1caf880eb8384bd40a5ff3cc, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
+    - target: {fileID: 7857273565567131888, guid: 0d7b9b8b1caf880eb8384bd40a5ff3cc, type: 3}
+      propertyPath: difficultyIncreaseInterval
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

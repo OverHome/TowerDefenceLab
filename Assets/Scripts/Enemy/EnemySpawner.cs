@@ -1,20 +1,63 @@
-using System;
 using UnityEngine;
-
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform towerPos;
-    [SerializeField] private EnemyScript enemyScript;
-    [SerializeField] private float spawnTimer;
-    private void Start()
+    [SerializeField] private float initialDelay = 2f;
+    [SerializeField] private float spawnInterval = 3f;
+    [SerializeField] private float difficultyIncreaseInterval = 20f;
+    [SerializeField] private float difficultyIncreaseAmount = 1.2f;
+
+    private float _spawnTimer;
+    private float _difficultyIncreaseTimer;
+    private float _startHealth;
+    private EnemyScript _enemyScript;
+
+    void Start()
     {
         EnemyScript.TowerPos = towerPos;
-        InvokeRepeating("SpawnEnemy", 0.0f, spawnTimer);
+        
+        _enemyScript = enemyPrefab.GetComponent<EnemyScript>();
+        _startHealth =_enemyScript.startHealth;
+        _spawnTimer = initialDelay;
+        _difficultyIncreaseTimer = 0f;
     }
 
-    private void SpawnEnemy()
+    void Update()
     {
-        Instantiate(enemyScript.gameObject, transform.position, transform.rotation, transform.parent);
+        UpdateTimers();
+
+        if (_spawnTimer <= 0f)
+        {
+            SpawnEnemy();
+            _spawnTimer = spawnInterval;
+        }
+
+        if (_difficultyIncreaseTimer >= difficultyIncreaseInterval)
+        {
+            IncreaseDifficulty();
+            _difficultyIncreaseTimer = 0f;
+        }
+    }
+
+    void UpdateTimers()
+    {
+        _spawnTimer -= Time.deltaTime;
+        _difficultyIncreaseTimer += Time.deltaTime;
+    }
+
+    void SpawnEnemy()
+    {
+        GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        enemyInstance.GetComponent<EnemyScript>().startHealth = _startHealth;
+    }
+
+    void IncreaseDifficulty()
+    {
+        spawnInterval /= difficultyIncreaseAmount;
+        _startHealth *= difficultyIncreaseAmount;
+       print("Сложность увеличена!");
     }
 }
