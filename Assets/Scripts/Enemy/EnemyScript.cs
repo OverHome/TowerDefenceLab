@@ -68,7 +68,7 @@ public class EnemyScript : MonoBehaviour
     {
         _health -= damage;
         hpUIBar.fillAmount = _health / StartHealth;
-    
+
         if (_health <= 0)
         {
             StartCoroutine(HandleEnemyDeath());
@@ -78,7 +78,7 @@ public class EnemyScript : MonoBehaviour
             StartCoroutine(PlayHitAnimation());
         }
     }
-    
+
 
     private IEnumerator HandleEnemyDeath()
     {
@@ -86,20 +86,17 @@ public class EnemyScript : MonoBehaviour
         _agent.enabled = false;
         PlayerManager.Instance.AddCoins(coinValue);
         PlayerManager.Instance.AddKill();
+        animator.Play(Random.Range(0, 2) == 0 ? "death1" : "death2");
         
-        _agent.isStopped = true;
-        animator.Play("death1");
-
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
-
-        _agent.isStopped = false;
+        
         Destroy(gameObject);
     }
 
     private IEnumerator PlayHitAnimation()
     {
         _agent.isStopped = true;
-        animator.Play("hit1");
+        animator.Play(Random.Range(0, 2) == 0 ? "hit1" : "hit2");
 
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / 2);
 
