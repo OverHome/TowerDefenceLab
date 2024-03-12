@@ -30,8 +30,9 @@ public class EnemyScript : MonoBehaviour
         hpUIBar.fillAmount = _health / startHealth;
         if (_health <= 0)
         {
-            Destroy(gameObject);
             PlayerManager.Instance.AddCoins(coinValue);
+            PlayerManager.Instance.AddKill();
+            Destroy(gameObject);
         }
     }
 

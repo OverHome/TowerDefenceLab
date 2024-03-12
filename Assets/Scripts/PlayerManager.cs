@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance;
 
     public int TotalCoins;
+    public int TotalKills;
+    public UnityEvent OnStop;
+    public bool IsGameStop;
 
     private void Awake()
     {
@@ -32,6 +36,19 @@ public class PlayerManager : MonoBehaviour
     {
         TotalCoins += amount;
         UpdateTotalCoinsText();
+    }
+    
+    public void AddKill()
+    {
+        TotalKills++;
+    }
+
+    public void StopGame()
+    {
+        OnStop.Invoke();
+        IsGameStop = true;
+        Time.timeScale = IsGameStop ? 0 : 1;
+
     }
 
     private void UpdateTotalCoinsText()
