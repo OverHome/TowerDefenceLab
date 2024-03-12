@@ -20,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
         EnemyScript.TowerPos = towerPos;
         
         _enemyScript = enemyPrefab.GetComponent<EnemyScript>();
-        _startHealth =_enemyScript.startHealth;
+        _startHealth =_enemyScript.StartHealth;
         _spawnTimer = initialDelay;
         _difficultyIncreaseTimer = 0f;
     }
@@ -51,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-        enemyInstance.GetComponent<EnemyScript>().startHealth = _startHealth;
+        enemyInstance.GetComponent<EnemyScript>().StartHealth = _startHealth;
     }
 
     void IncreaseDifficulty()

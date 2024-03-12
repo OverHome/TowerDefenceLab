@@ -649,6 +649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5452250870474363955}
   - component: {fileID: 7959247034158951267}
+  - component: {fileID: -1916615458186292095}
   m_Layer: 0
   m_Name: TowerPlace
   m_TagString: Untagged
@@ -698,7 +699,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -706,10 +707,23 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.026666665
+  m_VoxelSize: 0.029666668
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 998c7484d5bd5e512b6edb6fc526f17f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 59554cbd9f8a922a2ba86f29d9956382, type: 2}
   m_BuildHeightMesh: 0
+--- !u!114 &-1916615458186292095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868204605026455483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb898793194e03f4bb10dba03ec2cb70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DestroyOnRemoval: 1
 --- !u!1 &8059653883816981637
 GameObject:
   m_ObjectHideFlags: 0
