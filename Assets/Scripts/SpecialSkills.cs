@@ -1,28 +1,40 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class SpecialSkills : MonoBehaviour
 {
-    [SerializeField] private GameObject fireballPrefab;
-    
-    private float _launchForce = 10f;
+    [SerializeField] private Sprite unActivePanelImage;
+    [SerializeField] private Sprite activePanelImage;
+    [SerializeField] private GameObject skillsPanel;
+    [SerializeField] private Image showButtonImage;
+    [SerializeField] private GameObject firePanel;
 
-    private void Update()
+
+    public UnityEvent FireEvent;
+    public UnityEvent CanselEvent;
+    public UnityEvent<float> EditEvent;
+
+    public void OpenSkillPanel()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            LaunchFireball();
-        }
+        skillsPanel.SetActive(!skillsPanel.activeSelf);
+        showButtonImage.sprite = skillsPanel.activeSelf? activePanelImage: unActivePanelImage;
     }
 
-    public void LaunchFireball()
+    public void Fire()
     {
-        var fireball = Instantiate(fireballPrefab, transform.position, new Quaternion());
-        Vector3 launchDirection = Camera.main.transform.forward;
-        
-        Rigidbody projectileRb = fireball.GetComponent<Rigidbody>();
-        projectileRb.AddForce(launchDirection * _launchForce, ForceMode.Impulse);
-        fireball.transform.LookAt(fireball.transform.position + launchDirection);
+        FireEvent.Invoke();
+        firePanel.SetActive(false);
     }
-    
+    public void Cansel()
+    {
+        CanselEvent.Invoke();
+        firePanel.SetActive(false);
+    } 
+    public void Edit(float value)
+    {
+        EditEvent.Invoke(value);
+    }
+
 }
