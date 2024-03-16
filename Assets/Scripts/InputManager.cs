@@ -6,8 +6,11 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
     public UnityEvent<Vector2> OnScreenTap;
+    public UnityEvent<int> OnChangeSelect;
     private Camera _arCamera;
 
+    private int _selectedTurret = -1;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -75,5 +78,16 @@ public class InputManager : MonoBehaviour
                 interactiveObject.PressObject();
             }
         }
+    }
+
+    public void SelectTurretId(int id)
+    {
+        OnChangeSelect.Invoke(id);
+        _selectedTurret = id;
+    }
+    
+    public int GetTurretId()
+    {
+        return _selectedTurret;
     }
 }

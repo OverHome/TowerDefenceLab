@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef0bb15590cf47deb6473dcc5ed998bf, type: 3}
+  m_Name: Bombaedment
+  m_EditorClassIdentifier: 
+  Id: 1
+  Image: {fileID: 1470878021, guid: 4bc194479980fcc44ab310ce12319fc5, type: 3}
+  BuyPrice: 30
+  UpgradePrice: 20
+  FireRate: 0.25
+  Range: 5
+  BaseDamage: 30
+  BulletSpeed: 0
+  RotationDelay: 2

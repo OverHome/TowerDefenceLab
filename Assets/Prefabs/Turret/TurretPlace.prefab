@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretUI: {fileID: 5186045426763272228}
   turrets:
+  - {fileID: 7705079247747645073}
   - {fileID: 5421036628881483127}
 --- !u!1 &374199538009864914
 GameObject:
@@ -384,14 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b7adc217174bb9b7069d24e8037c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.25
-  range: 5
-  baseDamage: 30
-  bulletSpeed: 0.75
-  rotationDelay: 2
+  turretInfo: {fileID: 11400000, guid: 9ce861383585cee36b01405188bcb6ff, type: 2}
   projectile: {fileID: 1393406441597871861, guid: e5be39e59475c5cdb957dc170bd688eb, type: 3}
-  BuyPrice: 30
-  UpgradePrice: 20
   TurretLevel: 1
   TurretMaxLevel: 3
   bombPos: {fileID: 7018336661031376543}
@@ -1313,14 +1308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8cb9568a004082b3eddf47372cce0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.5
-  range: 10
-  baseDamage: 50
-  bulletSpeed: 10
-  rotationDelay: 2
+  turretInfo: {fileID: 11400000, guid: e8a0c2888436fc3a396950ca32659be0, type: 2}
   projectile: {fileID: 1393406441597871861, guid: 6c49636b782630f8085ab7d2310cead6, type: 3}
-  BuyPrice: 25
-  UpgradePrice: 20
   TurretLevel: 1
   TurretMaxLevel: 3
 --- !u!1 &7277055681115593787

@@ -10,10 +10,12 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager Instance;
 
+    public UnityEvent OnCoinCountEdit;
     public int TotalCoins;
     public int TotalKills;
     public UnityEvent OnStop;
     public bool IsGameStop;
+   
 
     private void Awake()
     {
@@ -37,6 +39,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (amount <= 0) throw new InvalidDataException();
         TotalCoins += amount;
+        OnCoinCountEdit.Invoke();
         UpdateTotalCoinsText();
     }
     
@@ -44,6 +47,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (amount <= 0) throw new InvalidDataException();
         TotalCoins -= amount;
+        OnCoinCountEdit.Invoke();
         UpdateTotalCoinsText();
     }
     
@@ -64,4 +68,5 @@ public class PlayerManager : MonoBehaviour
     {
         _totalCoinsText.text = TotalCoins.ToString();
     }
+    
 }

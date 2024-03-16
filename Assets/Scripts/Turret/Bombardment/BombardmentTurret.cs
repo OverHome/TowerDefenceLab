@@ -8,6 +8,6 @@ public class BombardmentTurret : BaseTurret
     protected override void FireProjectile()
     {
         GameObject projectileInstance = Instantiate(projectile, bombPos.position, transform.rotation);
-        projectileInstance.GetComponent<BombardmentBullet>().Initialized(_target.position, baseDamage, damageRadius);
+        projectileInstance.GetComponent<BombardmentBullet>().Initialized(_target.position, turretInfo.BaseDamage, damageRadius);
     }
 }

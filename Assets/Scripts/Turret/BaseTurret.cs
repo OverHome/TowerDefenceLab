@@ -3,15 +3,9 @@ using UnityEngine;
 
 public class BaseTurret : MonoBehaviour
 {
-    [SerializeField] protected float fireRate = 1.0f;
-    [SerializeField] protected float range = 10.0f;
-    [SerializeField] protected float baseDamage = 50.0f;
-    [SerializeField] protected float bulletSpeed = 10.0f;
-    [SerializeField] protected float rotationDelay = 2.0f;
+    [SerializeField] public TurretInfo turretInfo;
     [SerializeField] protected GameObject projectile;
 
-    public int BuyPrice = 50;
-    public int UpgradePrice = 20;
     public int TurretLevel = 1;
     public int TurretMaxLevel = 3;
 
@@ -24,12 +18,12 @@ public class BaseTurret : MonoBehaviour
     
     private void UpdateTarget()
     {
-        GameObject nearestEnemy = EnemyManager.Instance.FindNearestEnemy(transform.position, range);
+        GameObject nearestEnemy = EnemyManager.Instance.FindNearestEnemy(transform.position, turretInfo.Range);
         Transform newTarget = nearestEnemy?.transform;
 
         if (_target != newTarget)
         {
-            _currentDelay = rotationDelay;
+            _currentDelay = turretInfo.RotationDelay;
             _target = newTarget;
         }
     }
@@ -41,7 +35,7 @@ public class BaseTurret : MonoBehaviour
 
         if (Time.time >= _nextFireTime && _target != null && IsTargetInShootAngle())
         {
-            _nextFireTime = Time.time + 1.0f / fireRate;
+            _nextFireTime = Time.time + 1.0f / turretInfo.FireRate;
             FireProjectile();
         }
     }
@@ -81,7 +75,7 @@ public class BaseTurret : MonoBehaviour
     protected virtual void FireProjectile()
     {
         GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
-        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, baseDamage, bulletSpeed);
+        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage, turretInfo.BulletSpeed);
     }
 
     public virtual void UpgradeTurret()
@@ -93,7 +87,7 @@ public class BaseTurret : MonoBehaviour
 
     public virtual void SellTurret()
     {
-        PlayerManager.Instance.AddCoins(BuyPrice / 2 + (TurretLevel - 1) * (UpgradePrice / 2));
+        PlayerManager.Instance.AddCoins(turretInfo.BuyPrice / 2 + (TurretLevel - 1) * (turretInfo.UpgradePrice / 2));
         TurretLevel = 1;
         print("Турель продана");
     }
