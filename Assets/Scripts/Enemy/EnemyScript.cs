@@ -64,7 +64,7 @@ public class EnemyScript : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool playHitAnim = true)
     {
         _health -= damage;
         hpUIBar.fillAmount = _health / StartHealth;
@@ -75,7 +75,7 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            StartCoroutine(PlayHitAnimation());
+            if(playHitAnim) StartCoroutine(PlayHitAnimation());
         }
     }
 

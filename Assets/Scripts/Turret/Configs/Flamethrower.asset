@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef0bb15590cf47deb6473dcc5ed998bf, type: 3}
-  m_Name: Sniper
+  m_Name: Flamethrower
   m_EditorClassIdentifier: 
-  Id: 2
-  Image: {fileID: -805667857, guid: 592c429c4fd729fed820687d61a1fb28, type: 3}
-  BuyPrice: 35
+  Id: 3
+  Image: {fileID: -614722031, guid: 23d19435a9e974d0e90f1c05187e0f63, type: 3}
+  BuyPrice: 40
   UpgradePrice: 20
-  FireRate: 0.1
-  Range: 15
-  BaseDamage: 100
-  BulletSpeed: 60
+  FireRate: 4
+  Range: 2
+  BaseDamage: 1
+  BulletSpeed: 2
   RotationDelay: 2

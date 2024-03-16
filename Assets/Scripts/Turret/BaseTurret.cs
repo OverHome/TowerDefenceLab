@@ -10,6 +10,7 @@ public class BaseTurret : MonoBehaviour
     public int TurretMaxLevel = 3;
 
     protected Transform _target;
+    protected float _fireAngel = 5f;
     private float _targetUpdateInterval = 0.1f;
     private float _rotationDelay = 2.0f;
     private float _rotationSpeed = 5f;
@@ -28,7 +29,7 @@ public class BaseTurret : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         UpdateTarget();
         LookAtTarget();
@@ -60,13 +61,13 @@ public class BaseTurret : MonoBehaviour
         }
     }
 
-    private bool IsTargetInShootAngle()
+    protected bool IsTargetInShootAngle()
     {
         if (_target != null)
         {
             Vector3 targetDirection = (_target.position - transform.position).normalized;
             float angle = Vector3.Angle(targetDirection, transform.forward);
-            return angle <= 5f;
+            return angle <= _fireAngel;
         }
 
         return false;
