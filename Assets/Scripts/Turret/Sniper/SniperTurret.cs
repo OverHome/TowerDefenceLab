@@ -15,6 +15,18 @@ public class SniperTurret : BaseTurret
     private IEnumerator Fire(GameObject projectileInstance)
     {
         yield return new WaitForSeconds(0.5f);
-        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage, turretInfo.BulletSpeed);
+        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage*TurretLevel, turretInfo.BulletSpeed);
+    }
+    
+    protected override void UpdateTarget()
+    {
+        GameObject nearestEnemy = EnemyManager.Instance.FindBiggestEnemy(transform.position, turretInfo.Range);
+        Transform newTarget = nearestEnemy?.transform;
+
+        if (_target != newTarget)
+        {
+            _currentDelay = turretInfo.RotationDelay;
+            _target = newTarget;
+        }
     }
 }

@@ -82,7 +82,7 @@ public class EnemyScript : MonoBehaviour
 
     private IEnumerator HandleEnemyDeath()
     {
-        EnemyManager.Instance.UnregisterEnemy(gameObject);
+        EnemyManager.Instance.UnregisterEnemy(this);
         _agent.enabled = false;
         PlayerManager.Instance.AddCoins(coinValue);
         PlayerManager.Instance.AddKill();

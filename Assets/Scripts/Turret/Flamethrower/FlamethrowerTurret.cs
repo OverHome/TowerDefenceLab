@@ -4,6 +4,10 @@ using UnityEngine;
 public class FlamethrowerTurret : BaseTurret
 {
     [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private int burnTime = 5;
+
+
+    private float _damageBoost = 1f;
 
     private void Start()
     {
@@ -13,7 +17,7 @@ public class FlamethrowerTurret : BaseTurret
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        
+
         if (IsTargetInShootAngle())
         {
             particleSystem.gameObject.SetActive(true);
@@ -22,7 +26,6 @@ public class FlamethrowerTurret : BaseTurret
         {
             particleSystem.gameObject.SetActive(false);
         }
-        
     }
 
     protected override void FireProjectile()
@@ -35,21 +38,21 @@ public class FlamethrowerTurret : BaseTurret
                 EnemyScript enemyScript = collider.GetComponent<EnemyScript>();
                 if (enemyScript != null)
                 {
-                    enemyScript.TakeDamage(turretInfo.BaseDamage, false);
+                    enemyScript.TakeDamage(turretInfo.BaseDamage+_damageBoost*TurretLevel, false);
                     FlamethrowerBullet flameEffect = collider.GetComponentInChildren<FlamethrowerBullet>();
                     if (flameEffect == null)
                     {
-                        var projectileInstantiate = Instantiate(projectile, enemyScript.transform.position, new Quaternion(), enemyScript.transform);
-                        projectileInstantiate.GetComponent<FlamethrowerBullet>().Initialized(enemyScript, turretInfo.BaseDamage, 5f);
+                        var projectileInstantiate = Instantiate(projectile, enemyScript.transform.position,
+                            new Quaternion(), enemyScript.transform);
+                        projectileInstantiate.GetComponent<FlamethrowerBullet>()
+                            .Initialized(enemyScript, turretInfo.BaseDamage+_damageBoost*TurretLevel, burnTime);
                     }
                     else
                     {
-                        flameEffect.UpdateTime(5f);
+                        flameEffect.UpdateTime(burnTime);
                     }
                 }
             }
         }
     }
-
- 
 }

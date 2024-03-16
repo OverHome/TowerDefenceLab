@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class TurretUIScript : MonoBehaviour
 {
-    [SerializeField] private TurretScript turret;
     [SerializeField] private TextMeshProUGUI levelUI;
     [SerializeField] private Button updateButton;
+    [SerializeField] private GameObject sphereRange;
     private Camera _mainCamera;
     private Canvas _canvas;
 
@@ -35,13 +35,18 @@ public class TurretUIScript : MonoBehaviour
         }
     }
 
-    public void SetLevelUI()
+    public void SetLevelUI(int level, int maxLevel)
     {
-        levelUI.text = turret.TurretLevel.ToString();
-        if (turret.TurretMaxLevel == turret.TurretLevel)
+        levelUI.text = level.ToString();
+        if (maxLevel == level)
         {
             updateButton.gameObject.SetActive(false);
         }
+    }
+
+    public void SetRangeUI(float range)
+    {
+        sphereRange.transform.localScale = new Vector3(range, 1, range)*sphereRange.transform.localScale.x;
     }
 
     private void LateUpdate()

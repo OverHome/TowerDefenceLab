@@ -4,10 +4,10 @@ using UnityEngine;
 [RequireComponent(typeof(InteractiveObject))]
 public class TurretPlace : MonoBehaviour
 {
-    [SerializeField] private GameObject turretUI;
+    [SerializeField] private TurretUIScript turretUI;
     [SerializeField] private List<BaseTurret> turrets;
-    
-    
+
+
     private InteractiveObject _interactiveObject;
     private BaseTurret _selectTurret;
     private bool _isActiveTurret;
@@ -27,12 +27,12 @@ public class TurretPlace : MonoBehaviour
     {
         if (!_isActiveTurret)
         {
-            if(InputManager.Instance.GetTurretId() != -1)
+            if (InputManager.Instance.GetTurretId() != -1)
                 EnableTurret();
         }
         else
         {
-            turretUI.SetActive(true);
+            turretUI.gameObject.SetActive(true);
         }
     }
 
@@ -45,17 +45,22 @@ public class TurretPlace : MonoBehaviour
         _isActiveTurret = true;
         _selectTurret = turret;
         turret.gameObject.SetActive(_isActiveTurret);
+        turretUI.SetRangeUI(turret.turretInfo.Range);
     }
 
     public void UpgradeTurret()
     {
         if (PlayerManager.Instance.TotalCoins < _selectTurret.turretInfo.UpgradePrice ||
             _selectTurret.TurretLevel == _selectTurret.TurretMaxLevel) return;
-        PlayerManager.Instance.SpendCoins( _selectTurret.turretInfo.UpgradePrice);
+        PlayerManager.Instance.SpendCoins(_selectTurret.turretInfo.UpgradePrice);
+        _selectTurret.UpgradeTurret();
+        turretUI.SetLevelUI(_selectTurret.TurretLevel, _selectTurret.TurretMaxLevel);
     }
 
     public void SellTurret()
     {
+        PlayerManager.Instance.AddCoins(_selectTurret.turretInfo.BuyPrice / 2 +
+                                        (_selectTurret.TurretLevel - 1) * (_selectTurret.turretInfo.UpgradePrice / 2));
         _isActiveTurret = false;
         _selectTurret.SellTurret();
         _selectTurret.gameObject.SetActive(_isActiveTurret);

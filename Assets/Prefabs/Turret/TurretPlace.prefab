@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a2d7911d6542de814ede64b2fea15d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretUI: {fileID: 5186045426763272228}
+  turretUI: {fileID: 1231473862360343163}
   turrets:
   - {fileID: 7705079247747645073}
   - {fileID: 5421036628881483127}
@@ -974,9 +974,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e7029337d44ee1bb19d944161e87ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turret: {fileID: 0}
   levelUI: {fileID: 3812802889834440179}
   updateButton: {fileID: 3268004996490649525}
+  sphereRange: {fileID: 8964469090407784236}
 --- !u!1 &5419377348898806512
 GameObject:
   m_ObjectHideFlags: 0
@@ -7036,5 +7036,10 @@ PrefabInstance:
 --- !u!4 &8584953292403623318 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7de50abef3ed4e43894088ff2552414f, type: 3}
+  m_PrefabInstance: {fileID: 8118117615583666813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8964469090407784236 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7de50abef3ed4e43894088ff2552414f, type: 3}
   m_PrefabInstance: {fileID: 8118117615583666813}
   m_PrefabAsset: {fileID: 0}

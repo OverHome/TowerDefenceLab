@@ -31,7 +31,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        TotalCoins = 50;
+        TotalCoins = 500;
         UpdateTotalCoinsText();
     }
 

@@ -11,13 +11,15 @@ public class BaseTurret : MonoBehaviour
 
     protected Transform _target;
     protected float _fireAngel = 5f;
-    private float _targetUpdateInterval = 0.1f;
-    private float _rotationDelay = 2.0f;
-    private float _rotationSpeed = 5f;
-    private float _nextFireTime;
-    private float _currentDelay;
-    
-    private void UpdateTarget()
+    protected float _targetUpdateInterval = 0.1f;
+    protected float _rotationDelay = 2.0f;
+    protected float _rotationSpeed = 5f;
+    protected float _nextFireTime;
+    protected float _currentDelay;
+    protected float _fireRateBoost = 0;
+    protected float _damageBoost = 0;
+
+    protected virtual void UpdateTarget()
     {
         GameObject nearestEnemy = EnemyManager.Instance.FindNearestEnemy(transform.position, turretInfo.Range);
         Transform newTarget = nearestEnemy?.transform;
@@ -36,7 +38,7 @@ public class BaseTurret : MonoBehaviour
 
         if (Time.time >= _nextFireTime && _target != null && IsTargetInShootAngle())
         {
-            _nextFireTime = Time.time + 1.0f / turretInfo.FireRate;
+            _nextFireTime = Time.time + 1.0f / (turretInfo.FireRate + _fireRateBoost*TurretLevel);
             FireProjectile();
         }
     }
@@ -76,7 +78,8 @@ public class BaseTurret : MonoBehaviour
     protected virtual void FireProjectile()
     {
         GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
-        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage, turretInfo.BulletSpeed);
+        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage,
+            turretInfo.BulletSpeed + _damageBoost*TurretLevel);
     }
 
     public virtual void UpgradeTurret()
@@ -88,7 +91,6 @@ public class BaseTurret : MonoBehaviour
 
     public virtual void SellTurret()
     {
-        PlayerManager.Instance.AddCoins(turretInfo.BuyPrice / 2 + (TurretLevel - 1) * (turretInfo.UpgradePrice / 2));
         TurretLevel = 1;
         print("Турель продана");
     }

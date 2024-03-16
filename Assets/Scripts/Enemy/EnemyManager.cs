@@ -5,7 +5,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
 
-    private List<GameObject> enemies = new List<GameObject>();
+    private List<EnemyScript> enemies = new List<EnemyScript>();
 
     private void Awake()
     {
@@ -19,21 +19,21 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void RegisterEnemy(GameObject enemy)
+    public void RegisterEnemy(EnemyScript enemy)
     {
         enemies.Add(enemy);
     }
 
-    public void UnregisterEnemy(GameObject enemy)
+    public void UnregisterEnemy(EnemyScript enemy)
     {
         enemies.Remove(enemy);
     }
 
     public GameObject FindNearestEnemy(Vector3 position, float shortestDistance)
     {
-        GameObject nearestEnemy = null;
+        EnemyScript nearestEnemy = null;
 
-        foreach (GameObject enemy in enemies)
+        foreach (EnemyScript enemy in enemies)
         {
             float distance = Vector3.Distance(position, enemy.transform.position);
             if (distance < shortestDistance)
@@ -43,6 +43,22 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-        return nearestEnemy;
+        return nearestEnemy != null ? nearestEnemy.gameObject : null;
+    }
+
+    public GameObject FindBiggestEnemy(Vector3 position, float shortestDistance)
+    {
+        EnemyScript nearestEnemy = enemies[0];
+
+        foreach (EnemyScript enemy in enemies)
+        {
+            float distance = Vector3.Distance(position, enemy.transform.position);
+            if (distance < shortestDistance && nearestEnemy.StartHealth < enemy.StartHealth)
+            {
+                nearestEnemy = enemy;
+            }
+        }
+
+        return nearestEnemy != null ? nearestEnemy.gameObject : null;
     }
 }
