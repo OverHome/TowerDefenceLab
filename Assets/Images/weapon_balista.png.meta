@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weapon_blaster_E_0
+      name: weapon_balista_0
       rect:
         serializedVersion: 2
         x: 914
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4680556462ec317348d715cd564b46f6
-      internalID: 454480083
+      spriteID: e3dfe5aac57b3987e9658bb43501f33d
+      internalID: -805667857
       vertices: []
       indices: 
       edges: []
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      weapon_blaster_E_0: 454480083
+      weapon_balista_0: -805667857
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
