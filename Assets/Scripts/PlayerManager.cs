@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -34,7 +35,15 @@ public class PlayerManager : MonoBehaviour
 
     public void AddCoins(int amount)
     {
+        if (amount <= 0) throw new InvalidDataException();
         TotalCoins += amount;
+        UpdateTotalCoinsText();
+    }
+    
+    public void SpendCoins(int amount)
+    {
+        if (amount <= 0) throw new InvalidDataException();
+        TotalCoins -= amount;
         UpdateTotalCoinsText();
     }
     

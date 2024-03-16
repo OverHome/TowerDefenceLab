@@ -52,6 +52,7 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         enemyInstance.GetComponent<EnemyScript>().StartHealth = _startHealth;
+        EnemyManager.Instance.RegisterEnemy(enemyInstance);
     }
 
     void IncreaseDifficulty()

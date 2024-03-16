@@ -14,7 +14,7 @@ public class TurretScript : MonoBehaviour
     [SerializeField] private float bulletSpeed = 10.0f; 
     [SerializeField] private GameObject projectile;
 
-    private BulletScript _projectileScript;
+    // private BulletScript _projectileScript;
     private float _nextFireTime;
     private float _targetUpdateInterval = 0.1f;
     private Transform _target;
@@ -32,9 +32,9 @@ public class TurretScript : MonoBehaviour
     {
         _interactiveObject = GetComponent<InteractiveObject>();
         _turretPlace = transform.parent.GetComponent<TurretPlace>();
-        _projectileScript = projectile.GetComponent<BulletScript>();
-        _uiScript = turretUI.GetComponent<TurretUIScript>();
-        _damage = _projectileScript.Damage;
+        // _projectileScript = projectile.GetComponent<BulletScript>();
+        // _uiScript = turretUI.GetComponent<TurretUIScript>();
+        // _damage = _projectileScript.Damage;
         _interactiveObject.OnObjectPressed.AddListener(ShowUI);
     }
 
@@ -127,9 +127,9 @@ public class TurretScript : MonoBehaviour
         _nextFireTime = Time.time + 1.0f / (fireRate * TurretLevel);
 
         GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
-        projectileInstance.GetComponent<BulletScript>().Damage = _damage;
-        Vector3 bulletDirection = CalculateBulletDirection();
-        projectileInstance.GetComponent<Rigidbody>().velocity = bulletDirection;
+        // projectileInstance.GetComponent<BulletScript>().Damage = _damage;
+        // Vector3 bulletDirection = CalculateBulletDirection();
+        // projectileInstance.GetComponent<Rigidbody>().velocity = bulletDirection;
     }
 
     private Vector3 CalculateBulletDirection()

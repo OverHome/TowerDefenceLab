@@ -82,7 +82,7 @@ public class EnemyScript : MonoBehaviour
 
     private IEnumerator HandleEnemyDeath()
     {
-        gameObject.tag = "Untagged";
+        EnemyManager.Instance.UnregisterEnemy(gameObject);
         _agent.enabled = false;
         PlayerManager.Instance.AddCoins(coinValue);
         PlayerManager.Instance.AddKill();
