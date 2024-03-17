@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1698bb849d7c46d08c5475e48de64e2c, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  waves:
+  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
+    Count: 1
+    Rate: 1
+    IsWait: 0
+    WaitTime: 1
+    HealthMultiplier: 1
+  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
+    Count: 1
+    Rate: 1
+    IsWait: 1
+    WaitTime: 1
+    HealthMultiplier: 1
+  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
+    Count: 4
+    Rate: 1
+    IsWait: 0
+    WaitTime: 1
+    HealthMultiplier: 1

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyUIScript : MonoBehaviour
+public class HealthUIScript : MonoBehaviour
 {
     private Camera _mainCamera;
     

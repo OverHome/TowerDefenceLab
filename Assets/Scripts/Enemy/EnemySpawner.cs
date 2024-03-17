@@ -1,65 +1,63 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] public WavesInfo WavesInfo;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform towerPos;
-    [SerializeField] private float initialDelay = 2f;
-    [SerializeField] private float spawnInterval = 3f;
-    [SerializeField] private float difficultyIncreaseInterval = 20f;
-    [SerializeField] private float difficultyIncreaseAmount = 1.2f;
 
-    private float _spawnTimer;
-    private float _difficultyIncreaseTimer;
-    private float _startHealth;
     private EnemyScript _enemyScript;
+    private float _countdown = 1;
+    private int _waveCount;
+    private bool _inSpawn;
 
     void Start()
     {
         EnemyScript.TowerPos = towerPos;
-        
-        _enemyScript = enemyPrefab.GetComponent<EnemyScript>();
-        _startHealth =_enemyScript.StartHealth;
-        _spawnTimer = initialDelay;
-        _difficultyIncreaseTimer = 0f;
+        StartCoroutine(WaveControl());
     }
 
-    void Update()
+    private IEnumerator WaveControl()
     {
-        UpdateTimers();
-
-        if (_spawnTimer <= 0f)
+        yield return new WaitForSeconds(_countdown);
+        while (_waveCount != WavesInfo.waves.Length)
         {
-            SpawnEnemy();
-            _spawnTimer = spawnInterval;
+            if ((!EnemyManager.Instance.AreEnemiesAlive() && !_inSpawn) || !WavesInfo.waves[_waveCount].IsWait)
+            {
+                StartCoroutine(WaveSpawn(WavesInfo.waves[_waveCount]));
+                _waveCount++;
+            }
+
+            yield return new WaitForSeconds(WavesInfo.waves[_waveCount].WaitTime);
         }
 
-        if (_difficultyIncreaseTimer >= difficultyIncreaseInterval)
+        while (EnemyManager.Instance.AreEnemiesAlive())
         {
-            IncreaseDifficulty();
-            _difficultyIncreaseTimer = 0f;
+            yield return new WaitForSeconds(_countdown);
         }
+        PlayerManager.Instance.StopGame();
     }
 
-    void UpdateTimers()
+    private IEnumerator WaveSpawn(Wave wave)
     {
-        _spawnTimer -= Time.deltaTime;
-        _difficultyIncreaseTimer += Time.deltaTime;
+        _inSpawn = true;
+        for (int i = 0; i < wave.Count; i++)
+        {
+            SpawnEnemy(wave.Enemy, wave.HealthMultiplier);
+            yield return new WaitForSeconds(wave.Rate);
+        }
+
+        _inSpawn = false;
     }
 
-    void SpawnEnemy()
+
+    void SpawnEnemy(GameObject enemyPrefab, float health)
     {
         GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         EnemyScript enemy = enemyInstance.GetComponent<EnemyScript>();
-        enemy.StartHealth = _startHealth;
-        EnemyManager.Instance.RegisterEnemy(enemy);
+        enemy.StartHealth *= health; 
     }
 
-    void IncreaseDifficulty()
-    {
-        spawnInterval /= difficultyIncreaseAmount;
-        _startHealth *= difficultyIncreaseAmount;
-       print("Сложность увеличена!");
-    }
 }

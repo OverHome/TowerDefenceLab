@@ -48,6 +48,8 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject FindBiggestEnemy(Vector3 position, float shortestDistance)
     {
+        if (enemies.Count == 0) return null;
+        
         EnemyScript nearestEnemy = enemies[0];
 
         foreach (EnemyScript enemy in enemies)
@@ -60,5 +62,10 @@ public class EnemyManager : MonoBehaviour
         }
 
         return nearestEnemy != null ? nearestEnemy.gameObject : null;
+    }
+
+    public bool AreEnemiesAlive()
+    {
+        return enemies.Count != 0;
     }
 }

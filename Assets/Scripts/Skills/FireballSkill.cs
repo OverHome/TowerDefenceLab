@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class FireballSkill : MonoBehaviour
@@ -7,17 +8,15 @@ public class FireballSkill : MonoBehaviour
     [SerializeField] private SpecialSkills specialSkills;
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private Image fireballButtonImage;
-    [SerializeField] private int trajectoryPoints = 100;
-    [SerializeField] private float minLaunchForce = 5f;
-    [SerializeField] private float maxLaunchForce = 20;
-    [SerializeField] private float spacing = 0.1f;
     [SerializeField] private float timeWait = 40;
-
-    private float _launchForce = 10f;
+    [SerializeField] private float launchForce = 20f;
+    
     private Camera _camera;
     private LineRenderer _trajectoryLine;
     private Vector3[] _trajectoryPointsArray;
     private Vector3 _startOffset = new Vector3(0, 1, 0);
+    private int _trajectoryPoints = 100;
+    private float _spacing = 0.1f;
     private Coroutine _calculateCoroutine;
     private Rigidbody _projectileRb;
     private Button _fireballButton;
@@ -26,11 +25,11 @@ public class FireballSkill : MonoBehaviour
     {
         _camera = Camera.main;
         _trajectoryLine = gameObject.AddComponent<LineRenderer>();
-        _trajectoryLine.positionCount = trajectoryPoints;
+        _trajectoryLine.positionCount = _trajectoryPoints;
         _trajectoryLine.startWidth = 0.1f;
         _trajectoryLine.endWidth = 0.1f;
         _trajectoryLine.enabled = false;
-        _trajectoryPointsArray = new Vector3[trajectoryPoints];
+        _trajectoryPointsArray = new Vector3[_trajectoryPoints];
         _fireballButton = fireballButtonImage.GetComponent<Button>();
     }
 
@@ -39,7 +38,6 @@ public class FireballSkill : MonoBehaviour
         _calculateCoroutine = StartCoroutine(CalculateTrajectoryPoints());
         specialSkills.FireEvent.AddListener(LaunchFireball);
         specialSkills.CanselEvent.AddListener(CancelFireball);
-        specialSkills.EditEvent.AddListener(EditFireball);
     }
 
     private IEnumerator CalculateTrajectoryPoints()
@@ -49,10 +47,10 @@ public class FireballSkill : MonoBehaviour
         {
             Vector3 launchDirection = _camera.transform.forward;
 
-            for (int i = 0; i < trajectoryPoints; i++)
+            for (int i = 0; i < _trajectoryPoints; i++)
             {
-                float time = i * spacing;
-                Vector3 point = _camera.transform.position + _startOffset + launchDirection * _launchForce * time + 0.5f * Physics.gravity * time * time;
+                float time = i * _spacing;
+                Vector3 point = _camera.transform.position + _startOffset + launchDirection * launchForce * time + 0.5f * Physics.gravity * time * time;
                 _trajectoryPointsArray[i] = point;
             }
             _trajectoryLine.SetPositions(_trajectoryPointsArray);
@@ -63,7 +61,7 @@ public class FireballSkill : MonoBehaviour
 
     private void ClearTrajectory()
     {
-        for (int i = 0; i < trajectoryPoints; i++)
+        for (int i = 0; i < _trajectoryPoints; i++)
         {
             _trajectoryPointsArray[i] = Vector3.zero;
         }
@@ -78,7 +76,7 @@ public class FireballSkill : MonoBehaviour
         var fireball = Instantiate(fireballPrefab, _camera.transform.position + _startOffset, Quaternion.identity);
         Vector3 launchDirection = _camera.transform.forward;
 
-        fireball.GetComponent<Rigidbody>().AddForce(launchDirection * _launchForce, ForceMode.Impulse);
+        fireball.GetComponent<Rigidbody>().AddForce(launchDirection * launchForce, ForceMode.Impulse);
         fireball.transform.LookAt(fireball.transform.position + launchDirection);
         RemoveEventListeners();
         StartCoroutine(TimeOut());
@@ -89,11 +87,6 @@ public class FireballSkill : MonoBehaviour
         StopCalculateCoroutine();
         ClearTrajectory();
         RemoveEventListeners();
-    }
-
-    private void EditFireball(float value)
-    {
-        _launchForce = Mathf.Lerp(minLaunchForce, maxLaunchForce, value);
     }
 
     private void StopCalculateCoroutine()
@@ -108,7 +101,6 @@ public class FireballSkill : MonoBehaviour
     {
         specialSkills.FireEvent.RemoveListener(LaunchFireball);
         specialSkills.CanselEvent.RemoveListener(CancelFireball);
-        specialSkills.EditEvent.RemoveListener(EditFireball);
     }
 
     private IEnumerator TimeOut()

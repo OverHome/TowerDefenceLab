@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -92,6 +94,7 @@ public class EnemyScript : MonoBehaviour
         
         Destroy(gameObject);
     }
+    
 
     private IEnumerator PlayHitAnimation()
     {
@@ -101,5 +104,13 @@ public class EnemyScript : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / 2);
 
         _agent.isStopped = false;
+    }
+    private void OnEnable()
+    {
+        EnemyManager.Instance.RegisterEnemy(this);
+    }
+    private void OnDisable()
+    {
+        EnemyManager.Instance.UnregisterEnemy(this);
     }
 }
