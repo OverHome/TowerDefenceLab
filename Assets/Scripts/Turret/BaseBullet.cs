@@ -9,6 +9,7 @@ public class BaseBullet : MonoBehaviour
     protected Vector3 _destination;
     protected float _damage;
     protected float _speed;
+    protected bool _isTrigerred;
 
     private void Awake()
     {
@@ -31,8 +32,9 @@ public class BaseBullet : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy")&& !_isTrigerred)
         {
+            _isTrigerred = true;
             EnemyScript enemyScript = other.GetComponent<EnemyScript>();
             if (enemyScript != null)
             {

@@ -6,12 +6,10 @@ public class FlamethrowerTurret : BaseTurret
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private int burnTime = 5;
 
-
-    private float _damageBoost = 1f;
-
     private void Start()
     {
         _fireAngel = 10f;
+        _damageBoost = 1f;
     }
 
     protected override void FixedUpdate()
