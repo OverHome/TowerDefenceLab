@@ -40,6 +40,11 @@ public class SpawnObject : MonoBehaviour
             _raycastManager.Raycast(pos, hits, Settings.Instance?.UseDepth.CompareTo(true) == 1
                 ? TrackableType.Depth
                 : TrackableType.Planes | TrackableType.FeaturePoint);
+            if (hits.Count == 0)
+            {
+                print("nope");
+                return;
+            }
             var spawnedObject = Instantiate(spawnObject, hits[0].pose.position + new Vector3(0, 0.5f, 0), new Quaternion());
             RotateToCamera(spawnedObject);
             _isSpawned = true;
@@ -47,6 +52,8 @@ public class SpawnObject : MonoBehaviour
             {
                 plane.gameObject.SetActive(false);
             }
+            print("yes");
+            _planeManager.enabled = false;
         }
     }
 

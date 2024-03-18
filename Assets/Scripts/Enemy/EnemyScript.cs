@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour
     private NavMeshAgent _agent;
     private float _health;
     private Vector3 _lastMoveDirection;
+    private bool _isDie;
 
     private void Start()
     {
@@ -68,11 +69,13 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(float damage, bool playHitAnim = true)
     {
+        if(_isDie) return;
         _health -= damage;
         hpUIBar.fillAmount = _health / StartHealth;
 
         if (_health <= 0)
         {
+            _isDie = true;
             StartCoroutine(HandleEnemyDeath());
         }
         else

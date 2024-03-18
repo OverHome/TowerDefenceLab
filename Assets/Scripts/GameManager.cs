@@ -69,6 +69,12 @@ public class GameManager : MonoBehaviour
             LevelManager.Instance.OpenNextLevel();
         }
     }
+    
+    public void StopGame(bool isStop)
+    {
+        IsGameStop = isStop;
+        Time.timeScale = IsGameStop ? 0 : 1;
+    }
 
     private void UpdateTotalCoinsText()
     {

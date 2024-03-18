@@ -19,15 +19,3 @@ MonoBehaviour:
     IsWait: 0
     WaitTime: 1
     HealthMultiplier: 1
-  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
-    Count: 1
-    Rate: 1
-    IsWait: 1
-    WaitTime: 1
-    HealthMultiplier: 1
-  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
-    Count: 4
-    Rate: 1
-    IsWait: 0
-    WaitTime: 1
-    HealthMultiplier: 1

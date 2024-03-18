@@ -26,6 +26,7 @@ public class ResultsPanel : MonoBehaviour
 
     public void GoInMenu()
     {
+        GameManager.Instance.StopGame(false);
         SceneManager.LoadScene(0);
     }
 }
