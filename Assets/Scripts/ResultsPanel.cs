@@ -10,18 +10,18 @@ public class ResultsPanel : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.Instance.OnStop.AddListener(ShowResult);
+        GameManager.Instance.OnEnd.AddListener(ShowResult);
     }
     
     private void OnDisable()
     {
-        PlayerManager.Instance.OnStop.RemoveListener(ShowResult);
+        GameManager.Instance.OnEnd.RemoveListener(ShowResult);
     }
 
     private void ShowResult()
     {
         panelUI.SetActive(true);
-        countUI.text = PlayerManager.Instance.TotalKills.ToString();
+        countUI.text = GameManager.Instance.TotalKills.ToString();
     }
 
     public void GoInMenu()

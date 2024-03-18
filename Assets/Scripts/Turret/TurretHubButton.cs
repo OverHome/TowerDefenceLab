@@ -29,7 +29,7 @@ public class TurretHubButton : MonoBehaviour
         
         _button.onClick.AddListener(SelectTurret);
         InputManager.Instance.OnChangeSelect.AddListener(ChangeVisibility);
-        PlayerManager.Instance.OnCoinCountEdit.AddListener(SetActiveButton);
+        GameManager.Instance.OnCoinCountEdit.AddListener(SetActiveButton);
     }
 
     private void OnDisable()
@@ -51,7 +51,7 @@ public class TurretHubButton : MonoBehaviour
 
     private void SetActiveButton()
     {
-        bool canAfford = PlayerManager.Instance.TotalCoins >= turretInfo.BuyPrice;
+        bool canAfford = GameManager.Instance.TotalCoins >= turretInfo.BuyPrice;
         _button.enabled = canAfford;
         imageUI.color = !canAfford ? new Color(1, 1, 1, 0.3f) : Color.white;
     }

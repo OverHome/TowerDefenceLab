@@ -604,10 +604,11 @@ MonoBehaviour:
       m_Calls: []
   TotalCoins: 50
   TotalKills: 0
-  OnStop:
+  OnEnd:
     m_PersistentCalls:
       m_Calls: []
   IsGameStop: 0
+  IsWin: 0
 --- !u!114 &202368573
 MonoBehaviour:
   m_ObjectHideFlags: 0

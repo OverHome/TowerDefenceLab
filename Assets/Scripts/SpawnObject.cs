@@ -7,7 +7,7 @@ using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class SpawnObject : MonoBehaviour
 {
-    [SerializeField] private GameObject spawnObject;
+    [SerializeField] public GameObject spawnObject;
 
 
     private ARRaycastManager _raycastManager;
@@ -18,6 +18,10 @@ public class SpawnObject : MonoBehaviour
     {
         _raycastManager = GetComponent<ARRaycastManager>();
         _planeManager = GetComponent<ARPlaneManager>();
+        if (LevelManager.Instance?.GetLevelPrefab() != null)
+        {
+            spawnObject = LevelManager.Instance.GetLevelPrefab();
+        }
     }
 
     private void OnEnable()

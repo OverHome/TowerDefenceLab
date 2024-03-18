@@ -86,8 +86,8 @@ public class EnemyScript : MonoBehaviour
     {
         EnemyManager.Instance.UnregisterEnemy(this);
         _agent.enabled = false;
-        PlayerManager.Instance.AddCoins(coinValue);
-        PlayerManager.Instance.AddKill();
+        GameManager.Instance.AddCoins(coinValue);
+        GameManager.Instance.AddKill();
         animator.Play(Random.Range(0, 2) == 0 ? "death1" : "death2");
         
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);

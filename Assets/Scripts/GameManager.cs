@@ -3,18 +3,20 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-public class PlayerManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _totalCoinsText;
 
-    public static PlayerManager Instance;
+    public static GameManager Instance;
 
     public UnityEvent OnCoinCountEdit;
     public int TotalCoins;
     public int TotalKills;
-    public UnityEvent OnStop;
+    [FormerlySerializedAs("OnStop")] public UnityEvent OnEnd;
     public bool IsGameStop;
+    public bool IsWin;
    
 
     private void Awake()
@@ -56,12 +58,16 @@ public class PlayerManager : MonoBehaviour
         TotalKills++;
     }
 
-    public void StopGame()
+    public void EndGame(bool isWin)
     {
-        OnStop.Invoke();
+        OnEnd.Invoke();
         IsGameStop = true;
         Time.timeScale = IsGameStop ? 0 : 1;
-
+        IsWin = isWin;
+        if (isWin)
+        {
+            LevelManager.Instance.OpenNextLevel();
+        }
     }
 
     private void UpdateTotalCoinsText()

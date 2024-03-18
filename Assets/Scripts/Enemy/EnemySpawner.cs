@@ -1,10 +1,11 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] public WavesInfo WavesInfo;
+    [SerializeField] private WavesInfo wavesInfo;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform towerPos;
 
@@ -16,28 +17,33 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         EnemyScript.TowerPos = towerPos;
+        if (LevelManager.Instance?.GetWavesInfo() != null)
+        {
+            wavesInfo = LevelManager.Instance.GetWavesInfo();
+        }
+
         StartCoroutine(WaveControl());
     }
 
     private IEnumerator WaveControl()
     {
         yield return new WaitForSeconds(_countdown);
-        while (_waveCount != WavesInfo.waves.Length)
+        while (_waveCount != wavesInfo.waves.Length)
         {
-            if ((!EnemyManager.Instance.AreEnemiesAlive() && !_inSpawn) || !WavesInfo.waves[_waveCount].IsWait)
+            yield return new WaitForSeconds(wavesInfo.waves[_waveCount].WaitTime);
+            if ((!EnemyManager.Instance.AreEnemiesAlive() && !_inSpawn) || !wavesInfo.waves[_waveCount].IsWait)
             {
-                StartCoroutine(WaveSpawn(WavesInfo.waves[_waveCount]));
+                StartCoroutine(WaveSpawn(wavesInfo.waves[_waveCount]));
                 _waveCount++;
             }
-
-            yield return new WaitForSeconds(WavesInfo.waves[_waveCount].WaitTime);
         }
 
         while (EnemyManager.Instance.AreEnemiesAlive())
         {
             yield return new WaitForSeconds(_countdown);
         }
-        PlayerManager.Instance.StopGame();
+
+        GameManager.Instance.EndGame(true);
     }
 
     private IEnumerator WaveSpawn(Wave wave)
@@ -57,7 +63,6 @@ public class EnemySpawner : MonoBehaviour
     {
         GameObject enemyInstance = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
         EnemyScript enemy = enemyInstance.GetComponent<EnemyScript>();
-        enemy.StartHealth *= health; 
+        enemy.StartHealth *= health;
     }
-
 }

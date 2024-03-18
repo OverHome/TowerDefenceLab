@@ -26,7 +26,7 @@ public class TowerScript : MonoBehaviour
 
         if (_health <= 0)
         {
-            PlayerManager.Instance.StopGame();
+            GameManager.Instance.EndGame(false);
         }
     }
     
