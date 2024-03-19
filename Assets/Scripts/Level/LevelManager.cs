@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     
     public bool IsOpenLevel(int id)
     {
-        return id <= levels.Length && levels[id].IsOpen;
+        return id <= levels.Length-1 && levels[id].IsOpen;
     }
 
     public void SetLevel(int levelId)
@@ -56,8 +56,12 @@ public class LevelManager : MonoBehaviour
         }
         SaveLevels();
     }
-    
-    public void SaveLevels() {
+
+    public int GetLevel()
+    {
+        return _levelId;
+    }
+    private void SaveLevels() {
         string jsonData = JsonUtility.ToJson(new SaveLevelData(){CompletedLevels = _completedLevels});
         File.WriteAllText(Application.persistentDataPath + "/levels.json", jsonData);
     }

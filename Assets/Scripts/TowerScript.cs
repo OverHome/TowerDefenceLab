@@ -13,6 +13,8 @@ public class TowerScript : MonoBehaviour
     private void Start()
     {
         _health = startHealth;
+        GameManager.Instance.TowerHealth = (int)_health;
+        GameManager.Instance.StartTowerHealth = (int)_health;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -22,6 +24,7 @@ public class TowerScript : MonoBehaviour
         {
             _health -= 25;
             image.fillAmount = _health / startHealth;
+            GameManager.Instance.TowerHealth = (int)_health;
         }
 
         if (_health <= 0)

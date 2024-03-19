@@ -14,9 +14,11 @@ public class GameManager : MonoBehaviour
     public UnityEvent OnCoinCountEdit;
     public int TotalCoins;
     public int TotalKills;
-    [FormerlySerializedAs("OnStop")] public UnityEvent OnEnd;
+    public UnityEvent OnEnd;
     public bool IsGameStop;
     public bool IsWin;
+    public int TowerHealth;
+    public int StartTowerHealth;
    
 
     private void Awake()
@@ -69,6 +71,22 @@ public class GameManager : MonoBehaviour
             LevelManager.Instance.OpenNextLevel();
         }
     }
+
+    public int GetStars()
+    {
+        switch (TowerHealth)
+        {
+            case <= 0:
+                return 0;
+            case var health when health < StartTowerHealth / 2:
+                return 1;
+            case var health when health < StartTowerHealth:
+                return 2;
+            default:
+                return 3;
+        }
+    }
+
     
     public void StopGame(bool isStop)
     {
