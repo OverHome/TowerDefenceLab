@@ -24,7 +24,7 @@ public class ResultsPanel : MonoBehaviour
     private void ShowResult()
     {
         panelUI.SetActive(true);
-        countUI.text = GameManager.Instance.TotalKills.ToString();
+        countUI.text = GameManager.Instance.TempСrystalCount.ToString();
         
         for (int i = 0; i < GameManager.Instance.GetStars(); i++)
         {

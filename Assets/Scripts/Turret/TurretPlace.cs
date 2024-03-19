@@ -32,6 +32,7 @@ public class TurretPlace : MonoBehaviour
         }
         else
         {
+            turretUI.SetPrices(_selectTurret.turretInfo.UpgradePrice, GetSellPrice());
             turretUI.gameObject.SetActive(true);
         }
     }
@@ -55,14 +56,20 @@ public class TurretPlace : MonoBehaviour
         GameManager.Instance.SpendCoins(_selectTurret.turretInfo.UpgradePrice);
         _selectTurret.UpgradeTurret();
         turretUI.SetLevelUI(_selectTurret.TurretLevel, _selectTurret.TurretMaxLevel);
+        turretUI.SetPrices(_selectTurret.turretInfo.UpgradePrice, GetSellPrice());
     }
 
     public void SellTurret()
     {
-        GameManager.Instance.AddCoins(_selectTurret.turretInfo.BuyPrice / 2 +
-                                        (_selectTurret.TurretLevel - 1) * (_selectTurret.turretInfo.UpgradePrice / 2));
+        GameManager.Instance.AddCoins(GetSellPrice());
         _isActiveTurret = false;
         _selectTurret.SellTurret();
         _selectTurret.gameObject.SetActive(_isActiveTurret);
+    }
+
+    private int GetSellPrice()
+    {
+        return _selectTurret.turretInfo.BuyPrice / 2 +
+               (_selectTurret.TurretLevel - 1) * (_selectTurret.turretInfo.UpgradePrice / 2);
     }
 }

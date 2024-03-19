@@ -10,6 +10,8 @@ public class TurretUIScript : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelUI;
     [SerializeField] private Button updateButton;
     [SerializeField] private GameObject sphereRange;
+    [SerializeField] private TextMeshProUGUI upgradePriceText;
+    [SerializeField] private TextMeshProUGUI sellPriceText;
     private Camera _mainCamera;
     private Canvas _canvas;
 
@@ -55,4 +57,9 @@ public class TurretUIScript : MonoBehaviour
             _mainCamera.transform.rotation * Vector3.up);
     }
 
+    public void SetPrices(int upgradePrice, int sellPrice)
+    {
+        upgradePriceText.text = upgradePrice.ToString();
+        sellPriceText.text = sellPrice.ToString();
+    }
 }

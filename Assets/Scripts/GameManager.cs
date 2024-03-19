@@ -8,6 +8,7 @@ using UnityEngine.Serialization;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _totalCoinsText;
+    [SerializeField] private TextMeshProUGUI _totalСrystalText;
 
     public static GameManager Instance;
 
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public bool IsWin;
     public int TowerHealth;
     public int StartTowerHealth;
+    public int TempСrystalCount;
    
 
     private void Awake()
@@ -98,5 +100,11 @@ public class GameManager : MonoBehaviour
     {
         _totalCoinsText.text = TotalCoins.ToString();
     }
-    
+
+    public void AddСrystal(int count)
+    {
+        if(count < 0) return;
+        TempСrystalCount += count;
+        _totalСrystalText.text = TempСrystalCount.ToString();
+    }
 }

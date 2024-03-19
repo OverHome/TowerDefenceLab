@@ -5,7 +5,7 @@ public class BombardmentBullet : BaseBullet
 {
     private float _angle = 75f;
     private float _damageRadius;
-    private bool _damageDealt = false;
+ 
     protected override void Shoot()
     {
         Vector3 direction = (_destination - transform.position).normalized;
@@ -29,9 +29,9 @@ public class BombardmentBullet : BaseBullet
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!_damageDealt && other.CompareTag("Flore"))
+        if (!_isTrigerred && other.CompareTag("Flore"))
         {
-            _damageDealt = true;
+            _isTrigerred = true;
             _rb.useGravity = false;
             _rb.isKinematic = true;
             Collider[] colliders = Physics.OverlapSphere(transform.position, _damageRadius);

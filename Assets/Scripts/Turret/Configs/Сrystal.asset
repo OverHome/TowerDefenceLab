@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef0bb15590cf47deb6473dcc5ed998bf, type: 3}
-  m_Name: Canon
+  m_Name: "\u0421rystal"
   m_EditorClassIdentifier: 
-  Id: 0
-  Image: {fileID: -1559981779, guid: 517855ec9c4551c4d8dda8e0302fdc6a, type: 3}
-  BuyPrice: 25
-  UpgradePrice: 20
-  FireRate: 0.4
-  Range: 7
-  BaseDamage: 20
-  BulletSpeed: 7
-  RotationDelay: 2
+  Id: 4
+  Image: {fileID: -737950952, guid: eb0b4356a647c959689b84c83e5f26f5, type: 3}
+  BuyPrice: 50
+  UpgradePrice: 50
+  FireRate: 0.1
+  Range: 0
+  BaseDamage: 0
+  BulletSpeed: 0
+  RotationDelay: 0
