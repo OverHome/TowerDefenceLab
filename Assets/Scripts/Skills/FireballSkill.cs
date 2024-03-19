@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class FireballSkill : MonoBehaviour
     [SerializeField] private Image fireballButtonImage;
     [SerializeField] private float timeWait = 40;
     [SerializeField] private float launchForce = 20f;
+    [SerializeField] private int crystalPrice = 10;
     
     private Camera _camera;
     private LineRenderer _trajectoryLine;
@@ -20,6 +22,7 @@ public class FireballSkill : MonoBehaviour
     private Coroutine _calculateCoroutine;
     private Rigidbody _projectileRb;
     private Button _fireballButton;
+    private TextMeshProUGUI _priceText;
 
     private void Start()
     {
@@ -31,6 +34,15 @@ public class FireballSkill : MonoBehaviour
         _trajectoryLine.enabled = false;
         _trajectoryPointsArray = new Vector3[_trajectoryPoints];
         _fireballButton = fireballButtonImage.GetComponent<Button>();
+        _priceText = fireballButtonImage.GetComponentInChildren<TextMeshProUGUI>();
+        GameManager.Instance.OnCrystalCountEdit.AddListener(ButtonVisibility);
+        _priceText.text = crystalPrice.ToString();
+        ButtonVisibility();
+    }
+
+    private void ButtonVisibility()
+    {
+        _fireballButton.interactable = GameManager.Instance.TempСrystalCount >= crystalPrice;
     }
 
     public void PrepareFireball()
@@ -38,6 +50,7 @@ public class FireballSkill : MonoBehaviour
         _calculateCoroutine = StartCoroutine(CalculateTrajectoryPoints());
         specialSkills.FireEvent.AddListener(LaunchFireball);
         specialSkills.CanselEvent.AddListener(CancelFireball);
+        GameManager.Instance.SpendСrystal(crystalPrice);
     }
 
     private IEnumerator CalculateTrajectoryPoints()
@@ -114,8 +127,8 @@ public class FireballSkill : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-
-        fireballButtonImage.fillAmount = 1f;
         _fireballButton.enabled = true;
+        fireballButtonImage.fillAmount = 1f;
+        ButtonVisibility();
     }
 }

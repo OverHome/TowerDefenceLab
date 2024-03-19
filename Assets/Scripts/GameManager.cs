@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int TotalCoins;
     public int TotalKills;
     public UnityEvent OnEnd;
+    public UnityEvent OnCrystalCountEdit;
     public bool IsGameStop;
     public bool IsWin;
     public int TowerHealth;
@@ -106,5 +107,14 @@ public class GameManager : MonoBehaviour
         if(count < 0) return;
         TempСrystalCount += count;
         _totalСrystalText.text = TempСrystalCount.ToString();
+        OnCrystalCountEdit.Invoke();
+    }
+    
+    public void SpendСrystal(int count)
+    {
+        if(count < 0) return;
+        TempСrystalCount -= count;
+        _totalСrystalText.text = TempСrystalCount.ToString();
+        OnCrystalCountEdit.Invoke();
     }
 }
