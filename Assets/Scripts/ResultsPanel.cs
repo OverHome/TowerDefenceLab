@@ -26,11 +26,11 @@ public class ResultsPanel : MonoBehaviour
         panelUI.SetActive(true);
         countUI.text = GameManager.Instance.TotalKills.ToString();
         
-        nextLevelButton.gameObject.SetActive(LevelManager.Instance.IsOpenLevel(LevelManager.Instance.GetLevel()+1));
         for (int i = 0; i < GameManager.Instance.GetStars(); i++)
         {
             stars[i].color = Color.white;
         }
+        nextLevelButton.gameObject.SetActive(LevelManager.Instance.IsOpenLevel(LevelManager.Instance.GetLevel()+1));
     }
 
     public void GoInMenu()

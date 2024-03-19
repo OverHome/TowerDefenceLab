@@ -16,8 +16,8 @@ MonoBehaviour:
   Image: {fileID: -1559981779, guid: 517855ec9c4551c4d8dda8e0302fdc6a, type: 3}
   BuyPrice: 25
   UpgradePrice: 20
-  FireRate: 0.5
+  FireRate: 0.4
   Range: 7
-  BaseDamage: 50
+  BaseDamage: 20
   BulletSpeed: 10
   RotationDelay: 2

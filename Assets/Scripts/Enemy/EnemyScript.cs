@@ -12,7 +12,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Image hpUIBar;
     [SerializeField] public float StartHealth = 100;
     [SerializeField] protected int coinValue = 5;
-
+    
     public static Transform TowerPos;
 
     protected NavMeshAgent _agent;
@@ -20,8 +20,11 @@ public class EnemyScript : MonoBehaviour
     private Vector3 _lastMoveDirection;
     private bool _isDie;
     private float _defSpeed;
+    protected float _animSpeedRatio;
+    protected bool _isFireResist;
+    protected bool _isFly;
 
-    private void Start()
+    protected virtual void Start()
     {
         InitializeEnemy();
     }
@@ -31,7 +34,7 @@ public class EnemyScript : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _health = StartHealth;
         _defSpeed = _agent.speed;
-
+        
         SetupAnimator();
         SetAgentDestination();
     }
@@ -44,7 +47,8 @@ public class EnemyScript : MonoBehaviour
     protected virtual void SetupAnimator()
     {
         animator.SetInteger("moving", 1);
-        animator.speed = _agent.speed * 2;
+        _animSpeedRatio = 1;
+        animator.speed = _agent.speed * _animSpeedRatio;
     }
 
     private void FixedUpdate()
@@ -122,10 +126,23 @@ public class EnemyScript : MonoBehaviour
     public void SlowingDown(float ratio)
     {
         _agent.speed *= ratio;
+        animator.speed = _agent.speed * _animSpeedRatio;
+        
     }
     
     public void SetSpeedBack()
     {
         _agent.speed = _defSpeed;
+        animator.speed = _agent.speed * _animSpeedRatio;
+    }
+
+    public bool GetFireResist()
+    {
+        return _isFireResist;
+    }
+    
+    public bool GetFly()
+    {
+        return _isFly;
     }
 }

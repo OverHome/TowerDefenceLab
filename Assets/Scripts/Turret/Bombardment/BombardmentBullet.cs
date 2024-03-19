@@ -39,7 +39,7 @@ public class BombardmentBullet : BaseBullet
             {
                 EnemyScript healthScript = collider.GetComponent<EnemyScript>();
 
-                if (healthScript != null)
+                if (healthScript != null && !healthScript.GetFly())
                 {
                     healthScript.TakeDamage(_damage);
                 }

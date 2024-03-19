@@ -16,17 +16,23 @@ MonoBehaviour:
   - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
     Count: 5
     Rate: 1
-    IsWait: 0
+    IsWait: 1
     WaitTime: 1
     HealthMultiplier: 1
-  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
+  - Enemy: {fileID: 22832239819079767, guid: c1aa4cdeaebd43d20b5bbc4497332b84, type: 3}
+    Count: 3
+    Rate: 1
+    IsWait: 1
+    WaitTime: 1
+    HealthMultiplier: 1
+  - Enemy: {fileID: 22832239819079767, guid: 5a926b309fdeaa0bca4a093ab85ce0e6, type: 3}
     Count: 5
     Rate: 1
     IsWait: 1
     WaitTime: 1
     HealthMultiplier: 1
-  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
-    Count: 5
+  - Enemy: {fileID: 22832239819079767, guid: 19e791b77a40df8e48b0e5b08b814aec, type: 3}
+    Count: 3
     Rate: 1
     IsWait: 1
     WaitTime: 1

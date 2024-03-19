@@ -17,7 +17,7 @@ MonoBehaviour:
   BuyPrice: 30
   UpgradePrice: 20
   FireRate: 0.25
-  Range: 5
+  Range: 6
   BaseDamage: 30
   BulletSpeed: 0
   RotationDelay: 2

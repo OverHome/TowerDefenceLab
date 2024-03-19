@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Transform towerPos;
 
     private EnemyScript _enemyScript;
-    private float _countdown = 1;
+    private float _countdown = 2;
     private int _waveCount;
     private bool _inSpawn;
 

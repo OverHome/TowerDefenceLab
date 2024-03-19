@@ -8,7 +8,7 @@ public class FlamethrowerTurret : BaseTurret
 
     private void Start()
     {
-        _fireAngel = 10f;
+        _fireAngel = 15f;
         _damageBoost = 1f;
     }
 
@@ -34,7 +34,7 @@ public class FlamethrowerTurret : BaseTurret
             if (collider.CompareTag("Enemy"))
             {
                 EnemyScript enemyScript = collider.GetComponent<EnemyScript>();
-                if (enemyScript != null)
+                if (enemyScript != null && !enemyScript.GetFireResist())
                 {
                     enemyScript.TakeDamage(turretInfo.BaseDamage+_damageBoost*TurretLevel, false);
                     FlamethrowerBullet flameEffect = collider.GetComponentInChildren<FlamethrowerBullet>();

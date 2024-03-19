@@ -20,4 +20,4 @@ MonoBehaviour:
   Range: 2
   BaseDamage: 1
   BulletSpeed: 2
-  RotationDelay: 2
+  RotationDelay: 0.5
