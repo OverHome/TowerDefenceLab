@@ -4,7 +4,7 @@ using UnityEngine;
 public class FlamethrowerTurret : BaseTurret
 {
     [SerializeField] private ParticleSystem particleSystem;
-    [SerializeField] private int burnTime = 5;
+    [SerializeField] private int burnTime = 2;
 
     private void Start()
     {

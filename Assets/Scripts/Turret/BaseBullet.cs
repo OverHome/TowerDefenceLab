@@ -14,6 +14,10 @@ public class BaseBullet : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+    }
+
+    protected virtual void Start()
+    {
         Invoke(nameof(DestroyObject), 10f);
     }
 

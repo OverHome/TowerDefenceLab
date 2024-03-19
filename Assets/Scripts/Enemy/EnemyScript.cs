@@ -47,7 +47,7 @@ public class EnemyScript : MonoBehaviour
     protected virtual void SetupAnimator()
     {
         animator.SetInteger("moving", 1);
-        _animSpeedRatio = 1;
+        _animSpeedRatio = 2;
         animator.speed = _agent.speed * _animSpeedRatio;
     }
 

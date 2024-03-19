@@ -5,7 +5,12 @@ public class FlamethrowerBullet : BaseBullet
 {
     private float _flameTime;
     private EnemyScript _enemy;
-    
+
+    protected override void Start()
+    {
+       
+    }
+
     public void Initialized(EnemyScript enemy, float damage, float flameTime)
     {
         _enemy = enemy;
@@ -16,15 +21,17 @@ public class FlamethrowerBullet : BaseBullet
 
     private IEnumerator Burn()
     {
-        _enemy.SlowingDown(0.5f);
+        _enemy.SlowingDown(0.75f);
         while (_flameTime > 0)
         {
             yield return new WaitForSeconds(1);
             _flameTime --;
             _enemy.TakeDamage(_damage, false);
         }
+        
         _enemy.SetSpeedBack();
-        Destroy(gameObject);
+     
+        Destroy(gameObject, 0.5f);
     }
 
     public void UpdateTime(float time)

@@ -149,7 +149,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 0.5
+  m_Speed: 0.75
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 1
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1992540758674664319}
   hpUIBar: {fileID: 2509979796531247056}
-  StartHealth: 20
+  StartHealth: 50
   coinValue: 5
 --- !u!1 &2266024660315119198
 GameObject:
