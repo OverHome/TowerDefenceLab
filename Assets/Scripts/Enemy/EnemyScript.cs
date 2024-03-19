@@ -8,17 +8,18 @@ using Random = UnityEngine.Random;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] protected Animator animator;
     [SerializeField] private Image hpUIBar;
     [SerializeField] public float StartHealth = 100;
-    [SerializeField] private int coinValue = 5;
+    [SerializeField] protected int coinValue = 5;
 
     public static Transform TowerPos;
 
-    private NavMeshAgent _agent;
+    protected NavMeshAgent _agent;
     private float _health;
     private Vector3 _lastMoveDirection;
     private bool _isDie;
+    private float _defSpeed;
 
     private void Start()
     {
@@ -29,9 +30,10 @@ public class EnemyScript : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _health = StartHealth;
+        _defSpeed = _agent.speed;
 
-        SetAgentDestination();
         SetupAnimator();
+        SetAgentDestination();
     }
 
     private void SetAgentDestination()
@@ -39,7 +41,7 @@ public class EnemyScript : MonoBehaviour
         _agent.SetDestination(TowerPos.position);
     }
 
-    private void SetupAnimator()
+    protected virtual void SetupAnimator()
     {
         animator.SetInteger("moving", 1);
         animator.speed = _agent.speed * 2;
@@ -85,7 +87,7 @@ public class EnemyScript : MonoBehaviour
     }
 
 
-    private IEnumerator HandleEnemyDeath()
+    protected virtual IEnumerator HandleEnemyDeath()
     {
         EnemyManager.Instance.UnregisterEnemy(this);
         _agent.enabled = false;
@@ -99,7 +101,7 @@ public class EnemyScript : MonoBehaviour
     }
     
 
-    private IEnumerator PlayHitAnimation()
+    protected virtual IEnumerator PlayHitAnimation()
     {
         _agent.isStopped = true;
         animator.Play(Random.Range(0, 2) == 0 ? "hit1" : "hit2");
@@ -115,5 +117,15 @@ public class EnemyScript : MonoBehaviour
     private void OnDisable()
     {
         EnemyManager.Instance.UnregisterEnemy(this);
+    }
+
+    public void SlowingDown(float ratio)
+    {
+        _agent.speed *= ratio;
+    }
+    
+    public void SetSpeedBack()
+    {
+        _agent.speed = _defSpeed;
     }
 }
