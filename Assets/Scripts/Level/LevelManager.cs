@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -62,7 +63,7 @@ public class LevelManager : MonoBehaviour
         return _levelId;
     }
     private void SaveLevels() {
-        string jsonData = JsonUtility.ToJson(new SaveLevelData(){CompletedLevels = _completedLevels});
+        string jsonData = JsonConvert.SerializeObject(new SaveLevelData(){CompletedLevels = _completedLevels});
         File.WriteAllText(Application.persistentDataPath + "/levels.json", jsonData);
     }
 
@@ -71,7 +72,7 @@ public class LevelManager : MonoBehaviour
         if (File.Exists(path)) {
             print("load");
             string jsonData = File.ReadAllText(path);
-            _completedLevels = JsonUtility.FromJson<SaveLevelData>(jsonData).CompletedLevels;
+            _completedLevels =JsonConvert.DeserializeObject<SaveLevelData>(jsonData).CompletedLevels;
             for (int i = 0; i < _completedLevels.Length; i++)
             {
                 levels[i].IsOpen = _completedLevels[i];

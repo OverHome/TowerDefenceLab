@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour
         if (isWin)
         {
             LevelManager.Instance.OpenNextLevel();
+            if (PlayerProgress.Instance != null)
+            {
+                PlayerProgress.Instance.AddCrystal(TempСrystalCount);
+            }
         }
     }
 

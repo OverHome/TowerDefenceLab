@@ -34,6 +34,8 @@ public class TurretHubButton : MonoBehaviour
 
     private void OnDisable()
     {
+        InputManager.Instance.OnChangeSelect.RemoveListener(ChangeVisibility);
+        GameManager.Instance.OnCoinCountEdit.RemoveListener(SetActiveButton);
         _button.onClick.RemoveListener(SelectTurret);
     }
 

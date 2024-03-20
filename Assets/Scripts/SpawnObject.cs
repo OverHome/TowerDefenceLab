@@ -37,9 +37,7 @@ public class SpawnObject : MonoBehaviour
         if (!_isSpawned)
         {
             List<ARRaycastHit> hits = new List<ARRaycastHit>();
-            _raycastManager.Raycast(pos, hits, Settings.Instance?.UseDepth.CompareTo(true) == 1
-                ? TrackableType.Depth
-                : TrackableType.Planes | TrackableType.FeaturePoint);
+            _raycastManager.Raycast(pos, hits, TrackableType.Planes);
             if (hits.Count == 0)
             {
                 print("nope");
