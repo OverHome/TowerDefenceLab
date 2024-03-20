@@ -4,6 +4,7 @@ using UnityEngine;
 public class FlamethrowerTurret : BaseTurret
 {
     [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private int burnTime = 2;
 
     private void Start()
@@ -19,10 +20,12 @@ public class FlamethrowerTurret : BaseTurret
         if (IsTargetInShootAngle())
         {
             particleSystem.gameObject.SetActive(true);
+            if(!audioSource.isPlaying) audioSource.Play();
         }
         else
         {
             particleSystem.gameObject.SetActive(false);
+            audioSource.Stop();
         }
     }
 

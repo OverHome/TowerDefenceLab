@@ -10,7 +10,11 @@ public class TurretPlace : MonoBehaviour
     [SerializeField] private bool isBoosted;
     [SerializeField] private GameObject place;
     [SerializeField] private GameObject placeBoosted;
-    
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip destroy;
+    [SerializeField] private AudioClip levelUp;
+    [SerializeField] private AudioClip build;
+
     private InteractiveObject _interactiveObject;
     private BaseTurret _selectTurret;
     private bool _isActiveTurret;
@@ -20,7 +24,6 @@ public class TurretPlace : MonoBehaviour
     {
         _interactiveObject = GetComponent<InteractiveObject>();
         _interactiveObject.OnObjectPressed.AddListener(ClickProcessing);
-        
     }
 
     private void Start()
@@ -58,7 +61,8 @@ public class TurretPlace : MonoBehaviour
         _selectTurret = turret;
         turret.gameObject.SetActive(_isActiveTurret);
         turretUI.SetRangeUI(turret.turretInfo.Range);
-        _selectTurret.TurretMaxLevel += _levelBoost;
+        if (isBoosted) _selectTurret.TurretMaxLevel += _levelBoost;
+        audioSource.PlayOneShot(build);
     }
 
     public void UpgradeTurret()
@@ -69,6 +73,8 @@ public class TurretPlace : MonoBehaviour
         _selectTurret.UpgradeTurret();
         turretUI.SetLevelUI(_selectTurret.TurretLevel, _selectTurret.TurretMaxLevel);
         turretUI.SetPrices(_selectTurret.turretInfo.UpgradePrice, GetSellPrice());
+        audioSource.PlayOneShot(levelUp);
+        
     }
 
     public void SellTurret()
@@ -76,8 +82,10 @@ public class TurretPlace : MonoBehaviour
         GameManager.Instance.AddCoins(GetSellPrice());
         _isActiveTurret = false;
         _selectTurret.SellTurret();
-        _selectTurret.TurretMaxLevel -= _levelBoost;
+        if (isBoosted) _selectTurret.TurretMaxLevel -= _levelBoost;
         _selectTurret.gameObject.SetActive(_isActiveTurret);
+        turretUI.gameObject.SetActive(false);
+        audioSource.PlayOneShot(destroy);
     }
 
     private int GetSellPrice()

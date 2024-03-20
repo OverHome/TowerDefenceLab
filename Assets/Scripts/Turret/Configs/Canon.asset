@@ -19,5 +19,5 @@ MonoBehaviour:
   FireRate: 0.4
   Range: 7
   BaseDamage: 20
-  BulletSpeed: 7
+  BulletSpeed: 15
   RotationDelay: 2

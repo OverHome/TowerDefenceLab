@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class CristalTurret: BaseTurret
 {
+    [SerializeField] private AudioSource audioSource;
     [SerializeField] private int cristalCount;
     
     
@@ -17,6 +18,7 @@ public class CristalTurret: BaseTurret
 
     private void AddCristal()
     {
+        audioSource.Play();
         GameManager.Instance.AddСrystal(cristalCount*TurretLevel);
     }
 }

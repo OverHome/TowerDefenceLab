@@ -1,8 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BombardmentBullet : BaseBullet
 {
+    public UnityEvent OnBoom;
     private float _angle = 75f;
     private float _damageRadius;
  
@@ -31,6 +33,7 @@ public class BombardmentBullet : BaseBullet
     {
         if (!_isTrigerred && other.CompareTag("Flore"))
         {
+            OnBoom.Invoke();
             _isTrigerred = true;
             _rb.useGravity = false;
             _rb.isKinematic = true;
