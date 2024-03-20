@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
@@ -34,10 +35,11 @@ public class SpawnObject : MonoBehaviour
 
     private void Spawn(Vector2 pos)
     {
-        if (!_isSpawned)
+        if (!_isSpawned && !IsTouchUI(pos))
         {
             List<ARRaycastHit> hits = new List<ARRaycastHit>();
             _raycastManager.Raycast(pos, hits, TrackableType.Planes);
+            
             if (hits.Count == 0)
             {
                 print("nope");
@@ -72,5 +74,16 @@ public class SpawnObject : MonoBehaviour
         {
             Spawn(Input.mousePosition);
         }
+    }
+
+    private bool IsTouchUI(Vector2 pos)
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = pos
+        };
+        List<RaycastResult> results = new ();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count != 0;
     }
 }

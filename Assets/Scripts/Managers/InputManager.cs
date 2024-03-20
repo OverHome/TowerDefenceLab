@@ -72,6 +72,7 @@ public class InputManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            
             InteractiveObject interactiveObject = hit.collider.GetComponent<InteractiveObject>();
             if (interactiveObject != null)
             {
