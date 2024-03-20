@@ -15,6 +15,7 @@ public class TurretUIScript : MonoBehaviour
     private Camera _mainCamera;
     private Canvas _canvas;
 
+    private Vector3 _defScale;
     private void Start()
     {
         _mainCamera = Camera.main;
@@ -48,7 +49,13 @@ public class TurretUIScript : MonoBehaviour
 
     public void SetRangeUI(float range)
     {
+        _defScale = sphereRange.transform.localScale;
         sphereRange.transform.localScale = new Vector3(range, 1, range)*sphereRange.transform.localScale.x;
+    }
+    
+    public void DefRangeUI()
+    {
+        sphereRange.transform.localScale = _defScale;
     }
 
     private void LateUpdate()

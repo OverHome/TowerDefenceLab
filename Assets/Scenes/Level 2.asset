@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1698bb849d7c46d08c5475e48de64e2c, type: 3}
-  m_Name: Level 1
+  m_Name: Level 2
   m_EditorClassIdentifier: 
   waves:
-  - Enemy: {fileID: 22832239819079767, guid: e437a802cd3d5cd84b8a1a03d7282896, type: 3}
-    Count: 5
-    Rate: 1
+  - Enemy: {fileID: 22832239819079767, guid: 5a926b309fdeaa0bca4a093ab85ce0e6, type: 3}
+    Count: 10
+    Rate: 0.5
     IsWait: 1
     WaitTime: 1
     HealthMultiplier: 1
@@ -25,9 +25,9 @@ MonoBehaviour:
     IsWait: 1
     WaitTime: 1
     HealthMultiplier: 1.5
-  - Enemy: {fileID: 22832239819079767, guid: 5a926b309fdeaa0bca4a093ab85ce0e6, type: 3}
-    Count: 10
-    Rate: 0.5
+  - Enemy: {fileID: 22832239819079767, guid: c1aa4cdeaebd43d20b5bbc4497332b84, type: 3}
+    Count: 1
+    Rate: 1
     IsWait: 1
     WaitTime: 1
-    HealthMultiplier: 1.5
+    HealthMultiplier: 5

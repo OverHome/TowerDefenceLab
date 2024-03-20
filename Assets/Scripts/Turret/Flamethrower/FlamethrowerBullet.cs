@@ -21,7 +21,7 @@ public class FlamethrowerBullet : BaseBullet
 
     private IEnumerator Burn()
     {
-        _enemy.SlowingDown(0.75f);
+        _enemy.SlowingDown(0.5f);
         while (_flameTime > 0)
         {
             yield return new WaitForSeconds(1);

@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        TotalCoins = 500;
+        if(LevelManager.Instance.GetCoinCount() != 0) TotalCoins = LevelManager.Instance.GetCoinCount();
         UpdateTotalCoinsText();
     }
 
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(bool isWin)
     {
-        OnEnd.Invoke();
+        
         IsGameStop = true;
         Time.timeScale = IsGameStop ? 0 : 1;
         IsWin = isWin;
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
                 PlayerProgress.Instance.AddCrystal(TempСrystalCount);
             }
         }
+        OnEnd.Invoke();
     }
 
     public int GetStars()

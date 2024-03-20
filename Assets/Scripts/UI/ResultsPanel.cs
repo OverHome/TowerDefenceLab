@@ -10,6 +10,8 @@ public class ResultsPanel : MonoBehaviour
     [SerializeField] private GameObject panelUI;
     [SerializeField] private Button nextLevelButton;
     [SerializeField] private Image[] stars;
+    [SerializeField] private AudioSource audioSourceWin;
+    [SerializeField] private AudioSource audioSourceLose;
 
     private void Start()
     {
@@ -24,7 +26,17 @@ public class ResultsPanel : MonoBehaviour
     private void ShowResult()
     {
         panelUI.SetActive(true);
-        countUI.text = GameManager.Instance.TempСrystalCount.ToString();
+        if (GameManager.Instance.IsWin)
+        {
+            countUI.text = GameManager.Instance.TempСrystalCount.ToString();
+            audioSourceWin.Play();
+        }
+        else
+        {
+            countUI.text = "ТЫ ПРОИГРАЛ\nНИКАКИХ КРИСТАЛЛОВ";
+            countUI.transform.parent.GetComponent<TextMeshProUGUI>().enabled = false;
+            audioSourceLose.Play();
+        }
         
         for (int i = 0; i < GameManager.Instance.GetStars(); i++)
         {

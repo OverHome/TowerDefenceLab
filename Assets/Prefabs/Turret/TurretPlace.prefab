@@ -885,7 +885,7 @@ MonoBehaviour:
   TurretMaxLevel: 3
   particleSystem: {fileID: 7222059785759759341}
   audioSource: {fileID: 1421398484072254700}
-  burnTime: 2
+  burnTime: 5
 --- !u!1 &1922871710193510140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,9 +3323,9 @@ MonoBehaviour:
   turretInfo: {fileID: 11400000, guid: 11c67b37484991af59a156bf68b80f5c, type: 2}
   projectile: {fileID: 0}
   TurretLevel: 1
-  TurretMaxLevel: 3
+  TurretMaxLevel: 2
   audioSource: {fileID: 8400090451032423423}
-  cristalCount: 1
+  cristalCount: 2
 --- !u!1 &7271483451018448881
 GameObject:
   m_ObjectHideFlags: 0

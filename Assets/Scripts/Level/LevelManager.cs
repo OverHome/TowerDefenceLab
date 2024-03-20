@@ -48,6 +48,11 @@ public class LevelManager : MonoBehaviour
         return levels[_levelId].LevelWavesInfo;
     }
 
+    public int GetCoinCount()
+    {
+        return levels[_levelId].StartCoinCount;
+    }
+
     public void OpenNextLevel()
     {
         if (levels.Length > _levelId + 1)

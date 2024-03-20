@@ -84,6 +84,7 @@ public class TurretPlace : MonoBehaviour
         _selectTurret.SellTurret();
         if (isBoosted) _selectTurret.TurretMaxLevel -= _levelBoost;
         _selectTurret.gameObject.SetActive(_isActiveTurret);
+        turretUI.DefRangeUI();
         turretUI.gameObject.SetActive(false);
         audioSource.PlayOneShot(destroy);
     }
