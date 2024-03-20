@@ -11025,6 +11025,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5452250870474363955}
     m_Modifications:
+    - target: {fileID: -5978317640515262734, guid: 0ad2ccc0b37413c7e9ca7deb6f892265, type: 3}
+      propertyPath: isBoosted
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 85950624579424739, guid: 0ad2ccc0b37413c7e9ca7deb6f892265, type: 3}
       propertyPath: m_Name
       value: TurretPlace (1)

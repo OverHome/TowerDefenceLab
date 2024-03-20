@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,16 +7,26 @@ public class TurretPlace : MonoBehaviour
 {
     [SerializeField] private TurretUIScript turretUI;
     [SerializeField] private List<BaseTurret> turrets;
-
-
+    [SerializeField] private bool isBoosted;
+    [SerializeField] private GameObject place;
+    [SerializeField] private GameObject placeBoosted;
+    
     private InteractiveObject _interactiveObject;
     private BaseTurret _selectTurret;
     private bool _isActiveTurret;
+    private int _levelBoost = 2;
 
     private void OnEnable()
     {
         _interactiveObject = GetComponent<InteractiveObject>();
         _interactiveObject.OnObjectPressed.AddListener(ClickProcessing);
+        
+    }
+
+    private void Start()
+    {
+        place.SetActive(!isBoosted);
+        placeBoosted.SetActive(isBoosted);
     }
 
     private void OnDisable()
@@ -47,6 +58,7 @@ public class TurretPlace : MonoBehaviour
         _selectTurret = turret;
         turret.gameObject.SetActive(_isActiveTurret);
         turretUI.SetRangeUI(turret.turretInfo.Range);
+        _selectTurret.TurretMaxLevel += _levelBoost;
     }
 
     public void UpgradeTurret()
@@ -64,6 +76,7 @@ public class TurretPlace : MonoBehaviour
         GameManager.Instance.AddCoins(GetSellPrice());
         _isActiveTurret = false;
         _selectTurret.SellTurret();
+        _selectTurret.TurretMaxLevel -= _levelBoost;
         _selectTurret.gameObject.SetActive(_isActiveTurret);
     }
 

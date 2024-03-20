@@ -78,8 +78,8 @@ public class BaseTurret : MonoBehaviour
     protected virtual void FireProjectile()
     {
         GameObject projectileInstance = Instantiate(projectile, transform.position, transform.rotation);
-        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage,
-            turretInfo.BulletSpeed + _damageBoost*TurretLevel);
+        projectileInstance.GetComponent<BaseBullet>().Initialized(_target.position, turretInfo.BaseDamage + _damageBoost*TurretLevel,
+            turretInfo.BulletSpeed);
     }
 
     public virtual void UpgradeTurret()
